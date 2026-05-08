@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useForm, type Resolver } from "react-hook-form"
 import { z } from "zod"
 
-import { UsersService, type UserUpdateMe } from "@/client"
+import { __SelfService__UserProfile, type UserUpdateMe } from "@/client"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -60,7 +60,7 @@ const UserInformation = () => {
 
   const mutation = useMutation({
     mutationFn: (data: UserUpdateMe) =>
-      UsersService.updateUserMe({ requestBody: data }),
+      __SelfService__UserProfile["👤SelfService |UserProfileUpdateUserMe"]({ requestBody: data }),
     onSuccess: () => {
       showSuccessToast("User updated successfully")
       toggleEditMode()

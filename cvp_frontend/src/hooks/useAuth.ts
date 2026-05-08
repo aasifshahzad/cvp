@@ -6,7 +6,8 @@ import {
   LoginService,
   type UserPublic,
   type UserRegister,
-  UsersService,
+  __SelfService__UserProfile,
+  __Registration__UserSignup,
 } from "@/client"
 import { handleError } from "@/utils"
 import useCustomToast from "./useCustomToast"
@@ -22,13 +23,13 @@ const useAuth = () => {
 
   const { data: user } = useQuery<UserPublic | null, Error>({
     queryKey: ["currentUser"],
-    queryFn: UsersService.readUserMe,
+    queryFn: __SelfService__UserProfile["👤SelfService |UserProfileReadUserMe"],
     enabled: isLoggedIn(),
   })
 
   const signUpMutation = useMutation({
     mutationFn: (data: UserRegister) =>
-      UsersService.registerUser({ requestBody: data }),
+      __Registration__UserSignup["📝Registration |UserSignupRegisterUser"]({ requestBody: data }),
     onSuccess: () => {
       navigate({ to: "/login" })
     },

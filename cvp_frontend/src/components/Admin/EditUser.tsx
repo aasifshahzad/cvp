@@ -5,7 +5,7 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-import { type UserPublic, UsersService } from "@/client"
+import { type UserPublic, __️Admin__UserManagement } from "@/client"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
@@ -41,7 +41,7 @@ import { handleError } from "@/utils"
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }).optional(),
   full_name: z.string().optional(),
-  role: z.enum(["doctor", "staff", "admin", "patient"]).optional(),
+  role: z.enum(["doctor", "staff", "admin"]).optional(),
   phone: z.string().optional(),
   specialization: z.string().optional(),
   registration_number: z.string().optional(),
@@ -63,7 +63,7 @@ type FormData = z.infer<typeof formSchema>
 interface UserUpdateRequest {
   email?: string
   full_name?: string
-  role?: "doctor" | "staff" | "admin" | "patient"
+  role?: "doctor" | "staff" | "admin"
   phone?: string
   specialization?: string
   registration_number?: string
@@ -89,7 +89,7 @@ const EditUser = ({ user, onSuccess }: EditUserProps) => {
     mode: "onBlur",
     criteriaMode: "all",
     defaultValues: {
-      email: user.email,
+      email: user.email ?? undefined,
       full_name: (user as any).full_name ?? undefined,
       role: (user as any).role ?? undefined,
       phone: (user as any).phone ?? undefined,
@@ -107,7 +107,7 @@ const EditUser = ({ user, onSuccess }: EditUserProps) => {
 
   const mutation = useMutation({
     mutationFn: (data: UserUpdateRequest) =>
-      UsersService.updateUser({ userId: user.id, requestBody: data as any }),
+      __️Admin__UserManagement["🛡️Admin |UserManagementUpdateUser"]({ path: { user_id: user.id }, body: data as any }),
     onSuccess: () => {
       showSuccessToast("User updated successfully")
       setIsOpen(false)
@@ -211,7 +211,6 @@ const EditUser = ({ user, onSuccess }: EditUserProps) => {
                           <SelectItem value="doctor">Doctor</SelectItem>
                           <SelectItem value="staff">Staff</SelectItem>
                           <SelectItem value="admin">Admin</SelectItem>
-                          <SelectItem value="patient">Patient</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />

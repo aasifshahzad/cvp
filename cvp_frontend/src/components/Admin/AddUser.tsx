@@ -5,7 +5,7 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-import { UsersService } from "@/client"
+import { __️Admin__UserManagement } from "@/client"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -48,7 +48,7 @@ const formSchema = z
       .string()
       .min(1, { message: "Please confirm your password" }),
     full_name: z.string().min(1, { message: "Full name is required" }),
-    role: z.enum(["doctor", "staff", "admin", "patient"]),
+    role: z.enum(["doctor", "staff", "admin"]),
     phone: z.string().optional(),
     specialization: z.string().optional(),
     registration_number: z.string().optional(),
@@ -64,7 +64,7 @@ interface UserCreateRequest {
   email: string
   password: string
   full_name: string
-  role: "doctor" | "staff" | "admin" | "patient"
+  role: "doctor" | "staff" | "admin"
   phone?: string
   specialization?: string
   registration_number?: string
@@ -93,7 +93,7 @@ const AddUser = () => {
 
   const mutation = useMutation({
     mutationFn: (data: UserCreateRequest) =>
-      UsersService.createUser({ requestBody: data as any }),
+      __️Admin__UserManagement.adminCreateUser({ body: data }),
     onSuccess: () => {
       showSuccessToast("User created successfully")
       form.reset()
@@ -242,7 +242,6 @@ const AddUser = () => {
                           <SelectItem value="doctor">Doctor</SelectItem>
                           <SelectItem value="staff">Staff</SelectItem>
                           <SelectItem value="admin">Admin</SelectItem>
-                          <SelectItem value="patient">Patient</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />

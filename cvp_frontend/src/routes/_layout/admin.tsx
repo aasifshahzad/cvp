@@ -2,7 +2,7 @@ import { useSuspenseQuery } from "@tanstack/react-query"
 import { createFileRoute } from "@tanstack/react-router"
 import { Suspense } from "react"
 
-import { type UserPublic, UsersService } from "@/client"
+import { type UserPublic, type UsersPublic, __️Admin__UserManagement } from "@/client"
 import AddUser from "@/components/Admin/AddUser"
 import { columns, type UserTableData } from "@/components/Admin/columns"
 import { DataTable } from "@/components/Common/DataTable"
@@ -11,7 +11,10 @@ import useAuth from "@/hooks/useAuth"
 
 function getUsersQueryOptions() {
   return {
-    queryFn: () => UsersService.readUsers({ skip: 0, limit: 100 }),
+    queryFn: async (): Promise<UsersPublic> => {
+      const result = await __️Admin__UserManagement.adminReadUsers({ query: { skip: 0, limit: 100 } })
+      return result.data as UsersPublic
+    },
     queryKey: ["users"],
   }
 }
@@ -28,10 +31,13 @@ export const Route = createFileRoute("/_layout/admin")({
 })
 
 function UsersTableContent() {
-  const { user: currentUser } = useAuth()
-  const { data: users } = useSuspenseQuery(getUsersQueryOptions())
+  const { user: currentUser } = useAuth() as {
+    user: UserPublic | null | undefined
+  }
+  const { data: users } = useSuspenseQuery<UsersPublic>(getUsersQueryOptions())
 
-  const tableData: UserTableData[] = users.data.map((user: UserPublic) => ({
+  const usersList: UserPublic[] = users?.data ?? []
+  const tableData: UserTableData[] = usersList.map((user) => ({
     ...user,
     isCurrentUser: currentUser?.id === user.id,
   }))
