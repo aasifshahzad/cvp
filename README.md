@@ -29,30 +29,33 @@ Generic clinic software fails homeopathic practitioners because it doesn't under
 
 ## ✅ Core Deliverables
 
-| # | Deliverable | Description |
-|---|-------------|-------------|
-| 1 | **RESTful API** | Comprehensive endpoints for all clinic operations — patients, cases, appointments, prescriptions, and reports |
-| 2 | **Structured Data Models** | Purpose-built schemas for patients, cases, medicines, prescriptions, and appointments with full relational integrity |
-| 3 | **Auth & Access Control** | OAuth2 token-based authentication with role separation: `doctor`, `staff`, `admin`, `patient` |
-| 4 | **Reporting & Analytics** | Patient history, medicine usage, financial summaries, prescription analysis, and expiry alerts |
-| 5 | **Homeopathy-Specific Logic** | Miasm assessment, potency tracking (X/C/LM), kingdom classification, modalities, and dosage repetition |
-| 6 | **Scalable Architecture** | FastAPI backend with async operations; React + TypeScript + TanStack frontend with OpenAPI client generation |
+| #   | Deliverable                   | Description                                                                                                          |
+| --- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| 1   | **RESTful API**               | Comprehensive endpoints for all clinic operations — patients, cases, appointments, prescriptions, and reports        |
+| 2   | **Structured Data Models**    | Purpose-built schemas for patients, cases, medicines, prescriptions, and appointments with full relational integrity |
+| 3   | **Auth & Access Control**     | OAuth2 token-based authentication with role separation: `doctor`, `staff`, `admin`, `patient`                        |
+| 4   | **Reporting & Analytics**     | Patient history, medicine usage, financial summaries, prescription analysis, and expiry alerts                       |
+| 5   | **Homeopathy-Specific Logic** | Miasm assessment, potency tracking (X/C/LM), kingdom classification, modalities, and dosage repetition               |
+| 6   | **Scalable Architecture**     | FastAPI backend with async operations; React + TypeScript + TanStack frontend with OpenAPI client generation         |
 
 ---
 
 ## 🔄 End-to-End Workflow
 
 ### Step 1 — User Registration & Login
+
 - Doctors and staff register via `/users/signup` or are added by an admin
 - Login via email/password returns an OAuth2 token used for all subsequent requests
 - Patients do **not** log in — they are managed entirely by the doctor/staff
 
 ### Step 2 — Patient Registration
+
 - New patient added via `POST /patients/`
 - Captures: name, DOB, gender, contact details, medical history, and allergies
 - Each patient receives a unique ID linked to the treating doctor
 
 ### Step 3 — Case Taking
+
 - A case is created per visit via `POST /cases/`
 - Records:
   - Chief complaint, duration, onset, location, sensation
@@ -62,12 +65,14 @@ Generic clinic software fails homeopathic practitioners because it doesn't under
 - Forms the core **homeopathic case record**
 
 ### Step 4 — Appointment Scheduling
+
 - Booked via `POST /appointments/`
 - Supports first consultation and follow-up types
 - Status lifecycle: `Scheduled → Confirmed → In Progress → Completed`
 - Doctors can view today's and upcoming appointments at a glance
 
 ### Step 5 — Prescription Management
+
 - Created via `POST /prescriptions/` after case analysis
 - Includes medicine selection from master list, potency, dosage, duration
 - Attaches dietary restrictions and avoidance instructions
@@ -75,18 +80,22 @@ Generic clinic software fails homeopathic practitioners because it doesn't under
 - Supports print-ready prescription output
 
 ### Step 6 — Medicine Stock Management
+
 - Managed via `/medicines/stock`
 - Tracks: potency (X, C, LM), form (globules, pills, drops, diskettes), quantity, batch number, expiry date
 - System alerts for **low stock** and **expiring medicines**
 
 ### Step 7 — Follow-up Tracking
+
 - Recorded via `POST /followups/`
 - Logs: subjective/objective improvement, aggravation, amelioration, new symptoms
 - Schedules the next follow-up date
 - Builds a full longitudinal case progression record
 
 ### Step 8 — Reporting & Analytics
+
 Available under `/reports/`:
+
 - Patient history reports
 - Medicine usage summaries
 - Appointment statistics
@@ -95,6 +104,7 @@ Available under `/reports/`:
 - Expiry alerts
 
 ### Step 9 — Admin & System Management
+
 - Admin manages users, roles, and verification emails
 - Health check and system monitoring endpoints
 - Doctor availability and preference configuration
@@ -103,25 +113,25 @@ Available under `/reports/`:
 
 ## 📋 Services Overview
 
-| Service | Description | Key Endpoints |
-|---------|-------------|---------------|
-| Authentication & Users | Login, token management, user CRUD, password reset | `/login/*`, `/users/*` |
-| Patient Management | Registration, updating, search, stats | `/patients/*` |
-| Case Management | Homeopathic case recording, symptoms, miasm | `/cases/*` |
-| Appointment Management | Scheduling, status updates, availability check | `/appointments/*` |
-| Prescription Management | Creating prescriptions, linking medicines, printing | `/prescriptions/*` |
-| Medicine Master | Homeopathic medicine database (kingdom, symptoms, rubrics) | `/medicines/master/*` |
-| Medicine Stock | Doctor's personal stock, potency, expiry tracking | `/medicines/stock/*` |
-| Follow-up Tracking | Recording follow-up visits, scheduling next visits | `/followups/*` |
-| Doctor Availability | Managing doctor's schedule and exceptions | `/doctor-availability/*` |
-| Doctor Preferences | Configuring doctor-specific settings | `/doctor-preferences/*` |
-| Finance Management | Financial transactions, fees, and billing | `/finance/*` |
-| Enums & Preferences | System enumerations and user preferences | `/enums/*` |
-| Onsite Consultation | Managing onsite patient consultations | `/onsite-consultation/*` |
-| Onsite Patient | Patient management for onsite visits | `/onsite-patient/*` |
-| Reporting & Analytics | Patient history, medicine usage, financial reports | `/reports/*` |
-| Web Content | Managing website content and public information | `/web-content/*` |
-| Utilities | Email testing, system health, verification | `/utils/*` |
+| Service                 | Description                                                | Key Endpoints            |
+| ----------------------- | ---------------------------------------------------------- | ------------------------ |
+| Authentication & Users  | Login, token management, user CRUD, password reset         | `/login/*`, `/users/*`   |
+| Patient Management      | Registration, updating, search, stats                      | `/patients/*`            |
+| Case Management         | Homeopathic case recording, symptoms, miasm                | `/cases/*`               |
+| Appointment Management  | Scheduling, status updates, availability check             | `/appointments/*`        |
+| Prescription Management | Creating prescriptions, linking medicines, printing        | `/prescriptions/*`       |
+| Medicine Master         | Homeopathic medicine database (kingdom, symptoms, rubrics) | `/medicines/master/*`    |
+| Medicine Stock          | Doctor's personal stock, potency, expiry tracking          | `/medicines/stock/*`     |
+| Follow-up Tracking      | Recording follow-up visits, scheduling next visits         | `/followups/*`           |
+| Doctor Availability     | Managing doctor's schedule and exceptions                  | `/doctor-availability/*` |
+| Doctor Preferences      | Configuring doctor-specific settings                       | `/doctor-preferences/*`  |
+| Finance Management      | Financial transactions, fees, and billing                  | `/finance/*`             |
+| Enums & Preferences     | System enumerations and user preferences                   | `/enums/*`               |
+| Onsite Consultation     | Managing onsite patient consultations                      | `/onsite-consultation/*` |
+| Onsite Patient          | Patient management for onsite visits                       | `/onsite-patient/*`      |
+| Reporting & Analytics   | Patient history, medicine usage, financial reports         | `/reports/*`             |
+| Web Content             | Managing website content and public information            | `/web-content/*`         |
+| Utilities               | Email testing, system health, verification                 | `/utils/*`               |
 
 ---
 
@@ -173,24 +183,26 @@ Patients do not interact with the platform directly. Their benefit comes through
 ## 🛠️ Tech Stack
 
 ### Backend
-| Layer | Technology |
-|-------|------------|
-| Framework | FastAPI (Python) |
-| Auth | OAuth2 / JWT |
-| API Style | RESTful |
+
+| Layer       | Technology           |
+| ----------- | -------------------- |
+| Framework   | FastAPI (Python)     |
+| Auth        | OAuth2 / JWT         |
+| API Style   | RESTful              |
 | Performance | Async / non-blocking |
 
 ### Frontend
-| Layer | Technology |
-|-------|------------|
-| Framework | React 18 |
-| Language | TypeScript |
-| Build Tool | Vite |
-| Routing | TanStack Router |
-| Data Fetching | TanStack Query |
-| Styling | Tailwind CSS |
-| API Client | Auto-generated via `openapi-ts` |
-| Testing | Playwright (E2E) |
+
+| Layer         | Technology                      |
+| ------------- | ------------------------------- |
+| Framework     | React 18                        |
+| Language      | TypeScript                      |
+| Build Tool    | Vite                            |
+| Routing       | TanStack Router                 |
+| Data Fetching | TanStack Query                  |
+| Styling       | Tailwind CSS                    |
+| API Client    | Auto-generated via `openapi-ts` |
+| Testing       | Playwright (E2E)                |
 
 ---
 
@@ -198,7 +210,7 @@ Patients do not interact with the platform directly. Their benefit comes through
 
 ```bash
 # Navigate to frontend directory
-cd cvp_frontend
+cd cvp_dashboard
 
 # Install dependencies
 npm install
@@ -211,7 +223,7 @@ Open at: [http://localhost:5173](http://localhost:5173)
 
 ### Environment Configuration
 
-Create `cvp_frontend/.env`:
+Create `cvp_dashboard/.env`:
 
 ```env
 VITE_API_URL=http://localhost:8000
@@ -241,7 +253,7 @@ Commit generated client files if your API schema has changed.
 ## 📁 Frontend Project Structure
 
 ```
-cvp_frontend/
+cvp_dashboard/
 ├── src/
 │   ├── client/        # Generated OpenAPI client and API service wrappers
 │   ├── components/    # Reusable UI components
@@ -273,16 +285,16 @@ npx playwright test --ui
 
 ## 📊 Platform Summary
 
-| Attribute | Value |
-|-----------|-------|
-| Target Users | Homeopathic doctors, clinic staff, admins |
-| Patient Interaction | Indirect (doctor-managed records) |
-| Architecture | Full-stack SaaS (REST API + React SPA) |
-| Auth Model | OAuth2 / token-based, role-separated |
-| Service Modules | 17 |
-| Workflow Steps | 9 (registration → follow-up) |
-| Report Types | 6 |
-| Potency Support | X, C, LM and custom |
+| Attribute           | Value                                     |
+| ------------------- | ----------------------------------------- |
+| Target Users        | Homeopathic doctors, clinic staff, admins |
+| Patient Interaction | Indirect (doctor-managed records)         |
+| Architecture        | Full-stack SaaS (REST API + React SPA)    |
+| Auth Model          | OAuth2 / token-based, role-separated      |
+| Service Modules     | 17                                        |
+| Workflow Steps      | 9 (registration → follow-up)              |
+| Report Types        | 6                                         |
+| Potency Support     | X, C, LM and custom                       |
 
 ---
 

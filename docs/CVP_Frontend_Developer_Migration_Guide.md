@@ -1,4 +1,5 @@
 # Frontend Migration Guide
+
 ## From Manual API Calls → Generated Client
 
 > For frontend developers migrating from direct `axios`/`fetch` calls to the auto-generated `@hey-api` OpenAPI client.
@@ -29,31 +30,35 @@
 ## 1. What Changed and Why
 
 ### Before (old approach)
+
 You wrote API calls by hand — hardcoded URLs, manual types, no compile-time safety:
 
 ```ts
 // ❌ Old approach
-const res = await axios.get("http://localhost:8000/patients/")
-const data = res.data  // type: any — no autocomplete, no safety
+const res = await axios.get("http://localhost:8000/patients/");
+const data = res.data; // type: any — no autocomplete, no safety
 ```
 
 Problems with this:
+
 - **Silent failures** — if the backend renames a field, the frontend breaks at runtime, not compile time
 - **Duplicated types** — you wrote TypeScript interfaces manually that duplicated what already existed in FastAPI models
 - **Hardcoded URLs** — one typo in a string and it's broken, with no IDE warning
 - **Manual auth headers** — you had to remember to pass the token on every request
 
 ### After (generated client)
+
 The backend's OpenAPI schema is used to auto-generate typed functions:
 
 ```ts
 // ✅ New approach
-import { PatientsService } from "@/client"
-const { data } = await PatientsService.readPatients()
+import { PatientsService } from "@/client";
+const { data } = await PatientsService.readPatients();
 // data is fully typed — IDE autocompletes every field, TypeScript catches mismatches
 ```
 
 Benefits:
+
 - **Type safety** — response shapes come directly from the backend schema
 - **No hardcoded URLs** — each endpoint is a named function
 - **Auth handled globally** — token is attached automatically to every request
@@ -78,10 +83,10 @@ src/client/
 
 ```ts
 // ✅ Correct
-import { PatientsService, type Patient } from "@/client"
+import { PatientsService, type Patient } from "@/client";
 
 // ❌ Avoid — internal paths may change on regeneration
-import { PatientsService } from "@/client/sdk.gen"
+import { PatientsService } from "@/client/sdk.gen";
 ```
 
 ---
@@ -92,11 +97,12 @@ The client is already configured in `main.tsx`. You do not need to set up anythi
 
 ```ts
 // main.tsx — already configured, do not duplicate this
-OpenAPI.BASE = import.meta.env.VITE_API_URL ?? "http://localhost:8000"
-OpenAPI.TOKEN = async () => localStorage.getItem("access_token") || ""
+OpenAPI.BASE = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
+OpenAPI.TOKEN = async () => localStorage.getItem("access_token") || "";
 ```
 
 This means:
+
 - Every request automatically goes to the correct backend URL
 - Every request automatically includes the JWT token from localStorage
 - You never manually set `Authorization` headers or base URLs in your components
@@ -111,12 +117,12 @@ This means:
 
 ```ts
 // ❌ Old
-const res = await axios.get("/patients/")
-const patients = res.data  // any[]
+const res = await axios.get("/patients/");
+const patients = res.data; // any[]
 
 // ✅ New
-import { PatientsService } from "@/client"
-const { data: patients } = await PatientsService.readPatients()
+import { PatientsService } from "@/client";
+const { data: patients } = await PatientsService.readPatients();
 // patients is Patient[] — fully typed
 ```
 
@@ -124,21 +130,27 @@ const { data: patients } = await PatientsService.readPatients()
 
 ```ts
 // ❌ Old
-const res = await axios.get(`/patients/${id}`)
-const patient = res.data
+const res = await axios.get(`/patients/${id}`);
+const patient = res.data;
 
 // ✅ New
-const { data: patient } = await PatientsService.readPatient({ patientId: id })
+const { data: patient } = await PatientsService.readPatient({ patientId: id });
 ```
 
 **With query parameters:**
 
 ```ts
 // ❌ Old
-const res = await axios.get("/patients/", { params: { skip: 0, limit: 20, search: "ali" } })
+const res = await axios.get("/patients/", {
+  params: { skip: 0, limit: 20, search: "ali" },
+});
 
 // ✅ New
-const { data } = await PatientsService.readPatients({ skip: 0, limit: 20, search: "ali" })
+const { data } = await PatientsService.readPatients({
+  skip: 0,
+  limit: 20,
+  search: "ali",
+});
 // Parameters are typed — IDE tells you what's available
 ```
 
@@ -154,18 +166,20 @@ const res = await axios.post("/patients/", {
   name: "Ahmed Khan",
   dob: "1990-01-01",
   gender: "male",
-})
-const newPatient = res.data
+});
+const newPatient = res.data;
 
 // ✅ New
-import { PatientsService, type PatientCreate } from "@/client"
+import { PatientsService, type PatientCreate } from "@/client";
 
 const payload: PatientCreate = {
   name: "Ahmed Khan",
   dob: "1990-01-01",
   gender: "male",
-}
-const { data: newPatient } = await PatientsService.createPatient({ requestBody: payload })
+};
+const { data: newPatient } = await PatientsService.createPatient({
+  requestBody: payload,
+});
 // TypeScript will error if you miss a required field or use the wrong type
 ```
 
@@ -175,15 +189,15 @@ const { data: newPatient } = await PatientsService.createPatient({ requestBody: 
 
 ```ts
 // ❌ Old
-const res = await axios.put(`/patients/${id}`, { name: "Updated Name" })
+const res = await axios.put(`/patients/${id}`, { name: "Updated Name" });
 
 // ✅ New
-import { PatientsService, type PatientUpdate } from "@/client"
+import { PatientsService, type PatientUpdate } from "@/client";
 
 const { data: updated } = await PatientsService.updatePatient({
   patientId: id,
   requestBody: { name: "Updated Name" },
-})
+});
 ```
 
 ---
@@ -192,10 +206,10 @@ const { data: updated } = await PatientsService.updatePatient({
 
 ```ts
 // ❌ Old
-await axios.delete(`/patients/${id}`)
+await axios.delete(`/patients/${id}`);
 
 // ✅ New
-await PatientsService.deletePatient({ patientId: id })
+await PatientsService.deletePatient({ patientId: id });
 ```
 
 ---
@@ -211,18 +225,18 @@ This is how most data fetching should be done in components — not raw `await` 
 const { data, isLoading } = useQuery({
   queryKey: ["patients"],
   queryFn: async () => {
-    const res = await axios.get("/patients/")
-    return res.data
+    const res = await axios.get("/patients/");
+    return res.data;
   },
-})
+});
 
 // ✅ New
-import { PatientsService } from "@/client"
+import { PatientsService } from "@/client";
 
 const { data, isLoading } = useQuery({
   queryKey: ["patients"],
   queryFn: () => PatientsService.readPatients(),
-})
+});
 // data.data is Patient[] — no manual typing needed
 ```
 
@@ -232,24 +246,24 @@ const { data, isLoading } = useQuery({
 // ❌ Old
 const mutation = useMutation({
   mutationFn: async (payload: any) => {
-    const res = await axios.post("/patients/", payload)
-    return res.data
+    const res = await axios.post("/patients/", payload);
+    return res.data;
   },
-})
+});
 
 // ✅ New
-import { PatientsService, type PatientCreate } from "@/client"
+import { PatientsService, type PatientCreate } from "@/client";
 
 const mutation = useMutation({
   mutationFn: (payload: PatientCreate) =>
     PatientsService.createPatient({ requestBody: payload }),
   onSuccess: () => {
-    queryClient.invalidateQueries({ queryKey: ["patients"] })
+    queryClient.invalidateQueries({ queryKey: ["patients"] });
   },
-})
+});
 
 // Usage in component:
-mutation.mutate({ name: "Ahmed Khan", dob: "1990-01-01", gender: "male" })
+mutation.mutate({ name: "Ahmed Khan", dob: "1990-01-01", gender: "male" });
 ```
 
 ---
@@ -260,16 +274,16 @@ mutation.mutate({ name: "Ahmed Khan", dob: "1990-01-01", gender: "male" })
 
 ```ts
 // ❌ Old
-const res = await axios.post("/login/access-token", formData)
-localStorage.setItem("access_token", res.data.access_token)
+const res = await axios.post("/login/access-token", formData);
+localStorage.setItem("access_token", res.data.access_token);
 
 // ✅ New
-import { LoginService } from "@/client"
+import { LoginService } from "@/client";
 
 const { data } = await LoginService.loginAccessToken({
   requestBody: { username: email, password },
-})
-localStorage.setItem("access_token", data.access_token)
+});
+localStorage.setItem("access_token", data.access_token);
 ```
 
 **All other requests — nothing changes.** The token is attached automatically by the `OpenAPI.TOKEN` configuration in `main.tsx`. You do not add Authorization headers anywhere else.
@@ -278,8 +292,8 @@ localStorage.setItem("access_token", data.access_token)
 
 ```ts
 // Same as before — just clear the token
-localStorage.removeItem("access_token")
-window.location.href = "/login"
+localStorage.removeItem("access_token");
+window.location.href = "/login";
 ```
 
 ---
@@ -291,25 +305,25 @@ window.location.href = "/login"
 ```ts
 // ❌ Old
 try {
-  const res = await axios.post("/patients/", payload)
+  const res = await axios.post("/patients/", payload);
 } catch (err: any) {
-  console.error(err.response?.data?.detail)
+  console.error(err.response?.data?.detail);
 }
 
 // ✅ New
-import { ApiError } from "@/client"
+import { ApiError } from "@/client";
 
 const mutation = useMutation({
   mutationFn: (payload: PatientCreate) =>
     PatientsService.createPatient({ requestBody: payload }),
   onError: (error) => {
     if (error instanceof ApiError) {
-      console.error(error.status)       // HTTP status code
-      console.error(error.message)      // error message
-      console.error(error.body)         // full error response body
+      console.error(error.status); // HTTP status code
+      console.error(error.message); // error message
+      console.error(error.body); // full error response body
     }
   },
-})
+});
 ```
 
 ---
@@ -324,16 +338,16 @@ The generated client organises functions by the backend's route tags. The naming
 
 **Examples:**
 
-| Backend route | Tag | Generated function |
-|---------------|-----|--------------------|
-| `GET /patients/` | Patients | `PatientsService.readPatients()` |
-| `POST /patients/` | Patients | `PatientsService.createPatient()` |
-| `GET /patients/{id}` | Patients | `PatientsService.readPatient()` |
-| `POST /cases/` | Cases | `CasesService.createCase()` |
-| `GET /appointments/` | Appointments | `AppointmentsService.readAppointments()` |
-| `POST /prescriptions/` | Prescriptions | `PrescriptionsService.createPrescription()` |
-| `POST /login/access-token` | Login | `LoginService.loginAccessToken()` |
-| `GET /reports/patient-history` | Reports | `ReportsService.getPatientHistory()` |
+| Backend route                  | Tag           | Generated function                          |
+| ------------------------------ | ------------- | ------------------------------------------- |
+| `GET /patients/`               | Patients      | `PatientsService.readPatients()`            |
+| `POST /patients/`              | Patients      | `PatientsService.createPatient()`           |
+| `GET /patients/{id}`           | Patients      | `PatientsService.readPatient()`             |
+| `POST /cases/`                 | Cases         | `CasesService.createCase()`                 |
+| `GET /appointments/`           | Appointments  | `AppointmentsService.readAppointments()`    |
+| `POST /prescriptions/`         | Prescriptions | `PrescriptionsService.createPrescription()` |
+| `POST /login/access-token`     | Login         | `LoginService.loginAccessToken()`           |
+| `GET /reports/patient-history` | Reports       | `ReportsService.getPatientHistory()`        |
 
 **How to discover functions quickly:**
 
@@ -348,12 +362,12 @@ The generated client organises functions by the backend's route tags. The naming
 ### Autocomplete on response data
 
 ```ts
-const { data } = await PatientsService.readPatient({ patientId: id })
+const { data } = await PatientsService.readPatient({ patientId: id });
 
-data.name        // ✅ string
-data.dob         // ✅ string
-data.gender      // ✅ "male" | "female" | "other"
-data.nonExistent // ❌ TypeScript error — caught immediately
+data.name; // ✅ string
+data.dob; // ✅ string
+data.gender; // ✅ "male" | "female" | "other"
+data.nonExistent; // ❌ TypeScript error — caught immediately
 ```
 
 ### Required fields enforced on create
@@ -363,8 +377,8 @@ const { data } = await PatientsService.createPatient({
   requestBody: {
     name: "Ahmed",
     // dob missing ← TypeScript error: Property 'dob' is missing
-  }
-})
+  },
+});
 ```
 
 ### Importing types for forms and state
@@ -385,26 +399,26 @@ const handleSubmit = (data: PatientCreate) => { ... }
 
 ```ts
 // ❌ Don't import axios directly in components anymore
-import axios from "axios"
+import axios from "axios";
 
 // ❌ Don't hardcode the base URL
-const res = await axios.get("http://localhost:8000/patients/")
+const res = await axios.get("http://localhost:8000/patients/");
 
 // ❌ Don't manually set Authorization headers
-axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
+axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
 // ❌ Don't write manual TypeScript interfaces that duplicate backend models
 interface Patient {
-  id: string
-  name: string
+  id: string;
+  name: string;
   // ...
 }
 
 // ❌ Don't import from internal client files
-import { PatientsService } from "@/client/sdk.gen"
+import { PatientsService } from "@/client/sdk.gen";
 
 // ✅ Do all of this instead
-import { PatientsService, type Patient } from "@/client"
+import { PatientsService, type Patient } from "@/client";
 ```
 
 ---
@@ -416,7 +430,7 @@ import { PatientsService, type Patient } from "@/client"
 ```bash
 # 1. Backend developer adds new route and model
 # 2. You regenerate the client
-npm run generate-client   # run from cvp_frontend/
+npm run generate-client   # run from cvp_dashboard/
 
 # 3. New service function is immediately available
 import { NewService } from "@/client"
@@ -435,14 +449,14 @@ npm run generate-client
 
 ### When to regenerate
 
-| Situation | Regenerate? |
-|-----------|-------------|
-| New backend endpoint added | ✅ Yes |
-| Backend model field renamed or added | ✅ Yes |
-| Response type changed | ✅ Yes |
-| Only editing frontend components | ❌ No |
-| Restarting servers | ❌ No |
-| Fixing a frontend bug | ❌ No |
+| Situation                            | Regenerate? |
+| ------------------------------------ | ----------- |
+| New backend endpoint added           | ✅ Yes      |
+| Backend model field renamed or added | ✅ Yes      |
+| Response type changed                | ✅ Yes      |
+| Only editing frontend components     | ❌ No       |
+| Restarting servers                   | ❌ No       |
+| Fixing a frontend bug                | ❌ No       |
 
 ---
 
@@ -465,28 +479,31 @@ import {
   type Case,
   type Prescription,
   ApiError,
-} from "@/client"
+} from "@/client";
 
 // GET list
-const { data } = await PatientsService.readPatients({ skip: 0, limit: 20 })
+const { data } = await PatientsService.readPatients({ skip: 0, limit: 20 });
 
 // GET single
-const { data } = await PatientsService.readPatient({ patientId: id })
+const { data } = await PatientsService.readPatient({ patientId: id });
 
 // POST create
-const { data } = await PatientsService.createPatient({ requestBody: payload })
+const { data } = await PatientsService.createPatient({ requestBody: payload });
 
 // PUT update
-const { data } = await PatientsService.updatePatient({ patientId: id, requestBody: payload })
+const { data } = await PatientsService.updatePatient({
+  patientId: id,
+  requestBody: payload,
+});
 
 // DELETE
-await PatientsService.deletePatient({ patientId: id })
+await PatientsService.deletePatient({ patientId: id });
 
 // With TanStack Query
 const { data, isLoading, error } = useQuery({
   queryKey: ["patients", filters],
   queryFn: () => PatientsService.readPatients(filters),
-})
+});
 
 // With useMutation
 const mutation = useMutation({
@@ -494,9 +511,9 @@ const mutation = useMutation({
     PatientsService.createPatient({ requestBody: payload }),
   onSuccess: () => queryClient.invalidateQueries({ queryKey: ["patients"] }),
   onError: (error) => {
-    if (error instanceof ApiError) console.error(error.body)
+    if (error instanceof ApiError) console.error(error.body);
   },
-})
+});
 ```
 
 ---

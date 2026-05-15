@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "concurrently --kill-others --names \"BACKEND,FRONTEND\" --prefix-colors \"cyan,magenta\" \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:backend": "cd cvp_backend && uv run uvicorn main:app --reload --host 0.0.0.0 --port 8000",
-    "dev:frontend": "cd cvp_frontend && npm run dev",
-    "generate-client": "cd cvp_frontend && npm run generate-client",
-    "install:frontend": "cd cvp_frontend && npm install",
+    "dev:frontend": "cd cvp_dashboard && npm run dev",
+    "generate-client": "cd cvp_dashboard && npm run generate-client",
+    "install:frontend": "cd cvp_dashboard && npm install",
     "install:all": "npm install && npm run install:frontend"
   },
   "devDependencies": {

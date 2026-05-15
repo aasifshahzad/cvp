@@ -1,0 +1,156 @@
+================================================================================
+BACKEND FILES INDEX
+================================================================================
+
+
+📁 README.MD
+----------------------------------------
+  📄 README.md                                (  7482 bytes)
+
+📁 ALEMBIC
+----------------------------------------
+  📄 env.py                                   (  1953 bytes)
+  📄 187fa5974688_approve_all_existing_doctors.py (   576 bytes)
+  📄 20260102_add_audit_log.py                (  1412 bytes)
+  📄 20260117_doctor_availability.py          (  2382 bytes)
+  📄 20260117_patient_schema.py               (  2406 bytes)
+  📄 20260124_make_email_optional_for_patients.py (  1680 bytes)
+  📄 20260125_add_appointment_unique_constraint.py (  1640 bytes)
+  📄 20260206_add_rejection_reason.py         (   989 bytes)
+  📄 20260216_add_availability_exceptions.py  (  2446 bytes)
+  📄 20260222_add_duration_days.py            (  1233 bytes)
+  📄 20260305_add_followup_payment_confirmation.py (  1251 bytes)
+  📄 20260306_add_onsite_consultation_tables.py (  4317 bytes)
+  📄 20260314_make_dosage_nullable.py         (   988 bytes)
+  📄 20d81cf32f2e_improved_admin_approval_endpoints.py (   783 bytes)
+  📄 4085cd9f9281_enum_changes.py             (  7317 bytes)
+  📄 46da6b8459ca_initial_schema.py           ( 17114 bytes)
+  📄 47ae1a1bc15a_web_content_management.py   (  6909 bytes)
+  📄 4dd790bf463d_fix_case_prescription_relationships.py (  2947 bytes)
+  📄 5885062792d4_merge_audit_log_and_patient_schema_.py (   661 bytes)
+  📄 72b5e3eba95c_add_audit_log_model.py      (   700 bytes)
+  📄 7547ef73538d_appointment_relation_improved.py (  1254 bytes)
+  📄 7db72229909d_mdeicine_uuid_change.py     (  3262 bytes)
+  📄 89e09060d5ff_patient_booking_and_login.py (  5434 bytes)
+  📄 98d4504f3022_enums.py                    (  5152 bytes)
+  📄 a03a1a20c2a4_dynamic_enums.py            (  6186 bytes)
+  📄 a37e14dd73ae_appointment_pulic_routes.py (   774 bytes)
+  📄 c6725f8775d1_followup_custom_fields.py   (  2546 bytes)
+  📄 ccaec4e11a58_merge_admin_approval_related_migrations.py (   675 bytes)
+  📄 d5da195ff0e5_medicine_and_prescriptions.py (  8739 bytes)
+  📄 d89e53a0cd12_user_profile_and_doctor_approval_from_.py (  1685 bytes)
+  📄 db9d44a2cfde_drop_column_status.py       (  4515 bytes)
+  📄 e26d1920b882_staff_admin_approval.py     (   786 bytes)
+  📄 f8139387cdcd_finance_setup.py            (  9232 bytes)
+  📄 fd14529643fb_medicne.py                  (  5582 bytes)
+  📄 fe5393294599_pre_deploy_schema_check.py  (  4428 bytes)
+
+📁 API
+----------------------------------------
+  📄 __init__.py                              (     0 bytes)
+  📄 deps.py                                  (  8256 bytes)
+  📄 deps_old.py                              (  7253 bytes)
+  📄 router.py                                (  1368 bytes)
+
+📁 CORE
+----------------------------------------
+  📄 __init__.py                              (     0 bytes)
+  📄 auth_utils.py                            (  3156 bytes)
+  📄 config.py                                (  3311 bytes)
+  📄 db.py                                    (  1225 bytes)
+  📄 security.py                              (  2612 bytes)
+
+📁 DEBUG_MAIN.PY
+----------------------------------------
+  📄 debug_main.py                            (  1599 bytes)
+
+📁 MAIN.PY
+----------------------------------------
+  📄 main.py                                  ( 10748 bytes)
+
+📁 MODELS
+----------------------------------------
+  📄 __init__.py                              (  2966 bytes)
+  📄 alembic_base.py                          (   633 bytes)
+  📄 appointments_model.py                    (  3004 bytes)
+  📄 audit_model.py                           (   469 bytes)
+  📄 cases_model.py                           (  4851 bytes)
+  📄 doctor_availability_exception_model.py   (  3211 bytes)
+  📄 doctor_availability_model.py             (  2907 bytes)
+  📄 doctor_preferences_model.py              (  5411 bytes)
+  📄 enum_option_model.py                     (  6128 bytes)
+  📄 finance_model.py                         ( 12379 bytes)
+  📄 followups_model.py                       (  5034 bytes)
+  📄 login_model.py                           (  1825 bytes)
+  📄 medicines_model.py                       (  3640 bytes)
+  📄 onsite_consultation_model.py             (  4188 bytes)
+  📄 patients_model.py                        (  5075 bytes)
+  📄 prescriptions_model.py                   (  8146 bytes)
+  📄 private_model.py                         (  1436 bytes)
+  📄 public_models.py                         (  3963 bytes)
+  📄 reports_model.py                         (  1937 bytes)
+  📄 users_model.py                           (  7843 bytes)
+  📄 web_content_model.py                     ( 11089 bytes)
+
+📁 ONSITE_CONSULTATION.PY
+----------------------------------------
+  📄 onsite_consultation.py                   ( 24259 bytes)
+
+📁 ROUTES
+----------------------------------------
+  📄 __init__.py                              (     0 bytes)
+  📄 appointments.py                          ( 31502 bytes)
+  📄 cases.py                                 ( 12076 bytes)
+  📄 doctor_availability.py                   ( 30417 bytes)
+  📄 doctor_preferences.py                    ( 14912 bytes)
+  📄 enums.py                                 ( 14957 bytes)
+  📄 finance.py                               ( 35764 bytes)
+  📄 followups.py                             ( 23408 bytes)
+  📄 login.py                                 ( 14772 bytes)
+  📄 medicines.py                             ( 20701 bytes)
+  📄 onsite_consultation.py                   ( 30904 bytes)
+  📄 onsite_patient.py                        ( 14971 bytes)
+  📄 patients.py                              ( 29049 bytes)
+  📄 prescriptions.py                         ( 29170 bytes)
+  📄 private.py                               (  3534 bytes)
+  📄 public.py                                ( 10868 bytes)
+  📄 reports.py                               ( 22342 bytes)
+  📄 users.py                                 ( 62738 bytes)
+  📄 utils_routes.py                          (  2335 bytes)
+  📄 web_content.py                           ( 37883 bytes)
+
+📁 UTILS
+----------------------------------------
+  📄 __init__.py                              (     0 bytes)
+  📄 availability_service.py                  (  8542 bytes)
+  📄 backend_pre_start.py                     (   911 bytes)
+  📄 crud.py                                  (  2544 bytes)
+  📄 del_pycache.py                           (   803 bytes)
+  📄 end_points.py                            (   470 bytes)
+  📄 enum_service.py                          ( 11595 bytes)
+  📄 folder_structure.py                      (  1263 bytes)
+  📄 import_fix.py                            (  1783 bytes)
+  📄 initial_data.py                          ( 15216 bytes)
+  📄 initialize_web_content.py                ( 11235 bytes)
+  📄 jwt_error.py                             (   140 bytes)
+  📄 migrate_case_fields.py                   ( 10826 bytes)
+  📄 openapi.json                             (128816 bytes)
+  📄 tests_pre_start.py                       (   907 bytes)
+  📄 time.py                                  (  1504 bytes)
+  📄 utils.py                                 (  8423 bytes)
+
+
+================================================================================
+SECTION SUMMARY
+================================================================================
+
+README.MD              1 files     7,482 bytes
+ALEMBIC               35 files   119,954 bytes
+API                    4 files    16,877 bytes
+CORE                   5 files    10,304 bytes
+DEBUG_MAIN.PY          1 files     1,599 bytes
+MAIN.PY                1 files    10,748 bytes
+MODELS                21 files    96,135 bytes
+ONSITE_CONSULTATION.PY   1 files    24,259 bytes
+ROUTES                20 files   442,303 bytes
+UTILS                 17 files   204,978 bytes

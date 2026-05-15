@@ -1,11 +1,16 @@
 {
   "folders": [
     { "name": "⚙️ Backend", "path": "cvp_backend" },
-    { "name": "🖥️ Frontend", "path": "cvp_frontend" },
+    { "name": "🎨 Dashboard", "path": "cvp_dashboard" },
+    { "name": "🌐 Homeo Website", "path": "cvp_homeo" },
+    { "name": "🔧 Helpling Scripts", "path": "cvp_scripts" },
+    { "name": "📚 Docs", "path": "cvp_docs" },
     { "name": "🏠 Root", "path": "." },
   ],
   "settings": {
     "python.defaultInterpreterPath": "F:/2_PROJECTS/B2_CVP/cvp/cvp_backend/.venv/Scripts/python.exe",
     "python.terminal.activateEnvironment": true,
+    "cSpell.words": ["Helpling", "Homeo", "venv"],
+    "terminal.integrated.cwd": "${workspaceFolder:⚙️ Backend}",
   },
 }

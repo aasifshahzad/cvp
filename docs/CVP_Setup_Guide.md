@@ -38,7 +38,7 @@ You will see this structure after cloning:
 ```
 cvp/
 ├── cvp_backend/       ← FastAPI Python backend
-├── cvp_frontend/      ← React TypeScript frontend
+├── cvp_dashboard/     ← React TypeScript frontend
 ├── .vscode/           ← VS Code tasks and settings
 ├── cvp.code-workspace ← Open this in VS Code
 ├── package.json       ← Root monorepo scripts
@@ -134,9 +134,9 @@ Verify it works: open `http://localhost:8000/docs` in your browser — you shoul
 
 ## Step 7 — Configure frontend environment
 
-Create the `.env` file inside `cvp_frontend/`. This file is also **NOT committed to git**.
+Create the `.env` file inside `cvp_dashboard/`. This file is also **NOT committed to git**.
 
-**File location:** `cvp/cvp_frontend/.env`
+**File location:** `cvp/cvp_dashboard/.env`
 
 ```env
 VITE_API_URL=http://localhost:8000
@@ -147,7 +147,7 @@ VITE_API_URL=http://localhost:8000
 ## Step 8 — Install frontend dependencies
 
 ```bash
-cd ../cvp_frontend
+cd ../cvp_dashboard
 npm install
 ```
 
@@ -191,7 +191,7 @@ npm run dev
 # Open cvp.code-workspace → Press Ctrl+Shift+B
 ```
 
-> 💡 Run `npm run generate-client` (from `cvp_frontend/`) every time backend routes or models change.
+> 💡 Run `npm run generate-client` (from `cvp_dashboard/`) every time backend routes or models change.
 
 ---
 
@@ -225,8 +225,8 @@ ValidationError: PROJECT_NAME / POSTGRES_SERVER / POSTGRES_USER Field required
 White screen at http://localhost:3000
 ```
 
-**Cause:** `VITE_API_URL` missing in `cvp_frontend/.env`, or `routeTree.gen.ts` not generated.  
-**Fix:** Create `cvp_frontend/.env` with `VITE_API_URL=http://localhost:8000`, then restart `npm run dev`.
+**Cause:** `VITE_API_URL` missing in `cvp_dashboard/.env`, or `routeTree.gen.ts` not generated.  
+**Fix:** Create `cvp_dashboard/.env` with `VITE_API_URL=http://localhost:8000`, then restart `npm run dev`.
 
 ---
 

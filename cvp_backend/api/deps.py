@@ -279,3 +279,12 @@ def require_patient_ownership(patient: CurrentPatient) -> Patient:
             detail="Patient account is not active"
         )
     return patient
+
+
+# ============================================================================
+# CONVENIENCE TYPE ALIASES for self-documenting route signatures
+# ============================================================================
+
+DoctorUser = Annotated[User, Depends(require_doctor_role)]
+StaffUser = Annotated[User, Depends(require_staff_role)]
+SuperUser = Annotated[User, Depends(get_current_active_superuser)]

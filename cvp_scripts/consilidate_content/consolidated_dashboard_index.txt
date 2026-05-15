@@ -1,0 +1,294 @@
+================================================================================
+DASHBOARD FILES INDEX
+================================================================================
+
+
+📁 .GITHUB
+----------------------------------------
+  📄 copilot-instructions.md                  (  5619 bytes)
+
+📁 README.MD
+----------------------------------------
+  📄 README.md                                (  2936 bytes)
+
+📁 BIOME.JSON
+----------------------------------------
+  📄 biome.json                               (   995 bytes)
+
+📁 COMPONENTS.JSON
+----------------------------------------
+  📄 components.json                          (   446 bytes)
+
+📁 INDEX.HTML
+----------------------------------------
+  📄 index.html                               (   454 bytes)
+
+📁 OPENAPI-TS.CONFIG.TS
+----------------------------------------
+  📄 openapi-ts.config.ts                     (   373 bytes)
+
+📁 PACKAGE-LOCK.JSON
+----------------------------------------
+  📄 package-lock.json                        (244193 bytes)
+
+📁 PACKAGE.JSON
+----------------------------------------
+  📄 package.json                             (  2190 bytes)
+
+📁 PLAYWRIGHT.CONFIG.TS
+----------------------------------------
+  📄 playwright.config.ts                     (  2480 bytes)
+
+📁 SRC
+----------------------------------------
+  📄 AppointmentsService.ts                   (  7079 bytes)
+  📄 CasesService.ts                          (  4333 bytes)
+  📄 DoctorAvailabilityService.ts             ( 13650 bytes)
+  📄 DoctorPreferencesService.ts              (  5858 bytes)
+  📄 DoctorStatisticsService.ts               (   839 bytes)
+  📄 EnumsService.ts                          (  3293 bytes)
+  📄 FollowupsService.ts                      (  5877 bytes)
+  📄 MedicinesService.ts                      (  7041 bytes)
+  📄 OnsiteConsultationService.ts             (  3684 bytes)
+  📄 PatientsService.ts                       (  6419 bytes)
+  📄 PrescriptionsService.ts                  (  6215 bytes)
+  📄 ReportsService.ts                        (  5171 bytes)
+  📄 WebContentService.ts                     ( 13201 bytes)
+  📄 client.gen.ts                            (   850 bytes)
+  📄 client.gen.ts                            (  8034 bytes)
+  📄 index.ts                                 (   732 bytes)
+  📄 types.gen.ts                             (  6897 bytes)
+  📄 utils.gen.ts                             (  8570 bytes)
+  📄 ApiError.ts                              (   611 bytes)
+  📄 ApiRequestOptions.ts                     (   617 bytes)
+  📄 ApiResult.ts                             (   166 bytes)
+  📄 CancelablePromise.ts                     (  3258 bytes)
+  📄 OpenAPI.ts                               (  1477 bytes)
+  📄 auth.gen.ts                              (   864 bytes)
+  📄 bodySerializer.gen.ts                    (  2523 bytes)
+  📄 params.gen.ts                            (  4070 bytes)
+  📄 pathSerializer.gen.ts                    (  4257 bytes)
+  📄 queryKeySerializer.gen.ts                (  2974 bytes)
+  📄 request.ts                               (  9598 bytes)
+  📄 serverSentEvents.gen.ts                  (  7406 bytes)
+  📄 types.gen.ts                             (  3360 bytes)
+  📄 utils.gen.ts                             (  3415 bytes)
+  📄 index.ts                                 ( 42748 bytes)
+  📄 schemas.gen.ts                           (146509 bytes)
+  📄 sdk.gen.ts                               (175397 bytes)
+  📄 types.gen.ts                             (205496 bytes)
+  📄 AddUser.tsx                              ( 10505 bytes)
+  📄 DeleteUser.tsx                           (  2760 bytes)
+  📄 EditUser.tsx                             ( 12996 bytes)
+  📄 UserActionsMenu.tsx                      (  1115 bytes)
+  📄 columns.tsx                              (  2154 bytes)
+  📄 AddAppointment.tsx                       ( 21922 bytes)
+  📄 AppointmentActionsMenu.tsx               (  1254 bytes)
+  📄 DeleteAppointment.tsx                    (  2774 bytes)
+  📄 EditAppointment.tsx                      ( 10159 bytes)
+  📄 ViewAppointment.tsx                      (  4197 bytes)
+  📄 columns.tsx                              (  2750 bytes)
+  📄 AddCase.tsx                              ( 17991 bytes)
+  📄 CaseActionsMenu.tsx                      (  1089 bytes)
+  📄 DeleteCase.tsx                           (  2655 bytes)
+  📄 EditCase.tsx                             ( 11216 bytes)
+  📄 ViewCase.tsx                             (  5194 bytes)
+  📄 columns.tsx                              (  2179 bytes)
+  📄 Appearance.tsx                           (  3291 bytes)
+  📄 AuthLayout.tsx                           (   850 bytes)
+  📄 DataTable.tsx                            (  6287 bytes)
+  📄 ErrorComponent.tsx                       (   845 bytes)
+  📄 Footer.tsx                               (  1210 bytes)
+  📄 Logo.tsx                                 (  1442 bytes)
+  📄 NotFound.tsx                             (   894 bytes)
+  📄 AddAvailabilitySlot.tsx                  ( 10267 bytes)
+  📄 AddException.tsx                         ( 12257 bytes)
+  📄 AvailabilityActionsMenu.tsx              (  3859 bytes)
+  📄 AvailabilityScheduleView.tsx             (  6595 bytes)
+  📄 DeleteAvailabilitySlot.tsx               (  3516 bytes)
+  📄 DeleteException.tsx                      (  3299 bytes)
+  📄 EditAvailabilitySlot.tsx                 ( 10216 bytes)
+  📄 EditException.tsx                        ( 10187 bytes)
+  📄 ExceptionCalendarView.tsx                ( 10724 bytes)
+  📄 ExceptionsListView.tsx                   (  6552 bytes)
+  📄 ViewAvailabilitySlot.tsx                 (  4811 bytes)
+  📄 columns.tsx                              (  2689 bytes)
+  📄 index.ts                                 (   858 bytes)
+  📄 AddCustomField.tsx                       (  8723 bytes)
+  📄 DeleteCustomField.tsx                    (  3454 bytes)
+  📄 EnumManagement.tsx                       ( 14447 bytes)
+  📄 PreferenceActionsMenu.tsx                (  3738 bytes)
+  📄 columns.tsx                              (  3347 bytes)
+  📄 index.ts                                 (   258 bytes)
+  📄 AddCashBook.tsx                          (  5144 bytes)
+  📄 AddTransaction.tsx                       ( 19511 bytes)
+  📄 DeleteCashBook.tsx                       (  3084 bytes)
+  📄 EditCashBook.tsx                         (  5681 bytes)
+  📄 AddFollowup.tsx                          (  9684 bytes)
+  📄 DeleteFollowup.tsx                       (  2727 bytes)
+  📄 EditFollowup.tsx                         (  8373 bytes)
+  📄 FollowupActionsMenu.tsx                  (  1334 bytes)
+  📄 ScheduleNextFollowup.tsx                 (  5678 bytes)
+  📄 ViewFollowup.tsx                         (  5319 bytes)
+  📄 columns.tsx                              (  3390 bytes)
+  📄 AddItem.tsx                              (  4097 bytes)
+  📄 DeleteItem.tsx                           (  2619 bytes)
+  📄 EditItem.tsx                             (  4210 bytes)
+  📄 ItemActionsMenu.tsx                      (   991 bytes)
+  📄 columns.tsx                              (  1939 bytes)
+  📄 AddMedicine.tsx                          ( 10567 bytes)
+  📄 DeleteMedicine.tsx                       (  2882 bytes)
+  📄 EditMedicine.tsx                         ( 10557 bytes)
+  📄 FavoriteMedicineToggle.tsx               (  2032 bytes)
+  📄 MedicineActionsMenu.tsx                  (  1198 bytes)
+  📄 ViewMedicine.tsx                         (  5620 bytes)
+  📄 columns.tsx                              (  2092 bytes)
+  📄 ConsultationForm.tsx                     ( 51785 bytes)
+  📄 ConsultationSuccess.tsx                  (  3887 bytes)
+  📄 PatientReview.tsx                        (  6023 bytes)
+  📄 QuickRegister.tsx                        (  8685 bytes)
+  📄 SearchPatient.tsx                        (  9225 bytes)
+  📄 StepIndicator.tsx                        (  2620 bytes)
+  📄 AddPatient.tsx                           ( 18324 bytes)
+  📄 DeletePatient.tsx                        (  2706 bytes)
+  📄 EditPatient.tsx                          ( 13798 bytes)
+  📄 PatientActionsMenu.tsx                   (  1154 bytes)
+  📄 ViewPatient.tsx                          (  5505 bytes)
+  📄 columns.tsx                              (  2773 bytes)
+  📄 PendingAppointments.tsx                  (  2487 bytes)
+  📄 PendingCases.tsx                         (  2267 bytes)
+  📄 PendingFollowups.tsx                     (  2272 bytes)
+  📄 PendingItems.tsx                         (  1125 bytes)
+  📄 PendingMedicines.tsx                     (  2696 bytes)
+  📄 PendingPatients.tsx                      (  2483 bytes)
+  📄 PendingPrescriptions.tsx                 (  2700 bytes)
+  📄 PendingUsers.tsx                         (  1391 bytes)
+  📄 AddPrescription.tsx                      ( 44116 bytes)
+  📄 DeletePrescription.tsx                   (  2791 bytes)
+  📄 EditPrescription.tsx                     ( 41300 bytes)
+  📄 PrescriptionActionsMenu.tsx              (  1404 bytes)
+  📄 PrintPrescription.tsx                    (  8749 bytes)
+  📄 ViewPrescription.tsx                     (  7182 bytes)
+  📄 columns.tsx                              (  3512 bytes)
+  📄 AppSidebar.tsx                           (  2346 bytes)
+  📄 Main.tsx                                 (  1415 bytes)
+  📄 User.tsx                                 (  2922 bytes)
+  📄 ChangePassword.tsx                       (  4347 bytes)
+  📄 DeleteAccount.tsx                        (   458 bytes)
+  📄 DeleteConfirmation.tsx                   (  2425 bytes)
+  📄 UserInformation.tsx                      ( 10844 bytes)
+  📄 AboutDoctorForm.tsx                      ( 14583 bytes)
+  📄 ContactInformationForm.tsx               ( 13484 bytes)
+  📄 HeroSectionForm.tsx                      ( 11631 bytes)
+  📄 ServicesForm.tsx                         ( 12927 bytes)
+  📄 TestimonialsForm.tsx                     ( 14325 bytes)
+  📄 theme-provider.tsx                       (  2600 bytes)
+  📄 alert.tsx                                (  1614 bytes)
+  📄 avatar.tsx                               (  1083 bytes)
+  📄 badge.tsx                                (  1633 bytes)
+  📄 button-group.tsx                         (  2209 bytes)
+  📄 button.tsx                               (  2142 bytes)
+  📄 card.tsx                                 (  1987 bytes)
+  📄 checkbox.tsx                             (  1205 bytes)
+  📄 command.tsx                              (  5157 bytes)
+  📄 dialog.tsx                               (  3968 bytes)
+  📄 dropdown-menu.tsx                        (  8284 bytes)
+  📄 form.tsx                                 (  3745 bytes)
+  📄 input.tsx                                (   962 bytes)
+  📄 label.tsx                                (   611 bytes)
+  📄 loading-button.tsx                       (  2411 bytes)
+  📄 pagination.tsx                           (  2712 bytes)
+  📄 password-input.tsx                       (  1994 bytes)
+  📄 popover.tsx                              (  1361 bytes)
+  📄 searchable-select.tsx                    (  3417 bytes)
+  📄 select.tsx                               (  6281 bytes)
+  📄 separator.tsx                            (   685 bytes)
+  📄 sheet.tsx                                (  4090 bytes)
+  📄 sidebar.tsx                              ( 22059 bytes)
+  📄 skeleton.tsx                             (   276 bytes)
+  📄 sonner.tsx                               (  1034 bytes)
+  📄 table.tsx                                (  2511 bytes)
+  📄 tabs.tsx                                 (  1955 bytes)
+  📄 textarea.tsx                             (   773 bytes)
+  📄 tooltip.tsx                              (  1878 bytes)
+  📄 useAuth.ts                               (  1842 bytes)
+  📄 useCopyToClipboard.ts                    (   794 bytes)
+  📄 useCustomToast.ts                        (   385 bytes)
+  📄 useMobile.ts                             (   565 bytes)
+  📄 index.css                                (  4187 bytes)
+  📄 doctorEnums.ts                           (  3489 bytes)
+  📄 utils.ts                                 (   166 bytes)
+  📄 main.tsx                                 (  1526 bytes)
+  📄 routeTree.gen.ts                         ( 22795 bytes)
+  📄 __root.tsx                               (   651 bytes)
+  📄 _layout.tsx                              (  1127 bytes)
+  📄 admin.tsx                                (  1965 bytes)
+  📄 appointments.tsx                         (  4003 bytes)
+  📄 availability.tsx                         (  5219 bytes)
+  📄 cases.tsx                                (  3754 bytes)
+  📄 core-settings.tsx                        (  6620 bytes)
+  📄 finance.$cashBookId.tsx                  (  8162 bytes)
+  📄 finance.tsx                              (  6827 bytes)
+  📄 followups.tsx                            (  3755 bytes)
+  📄 index.tsx                                (  6718 bytes)
+  📄 items.tsx                                (  1892 bytes)
+  📄 medicines.tsx                            (  3849 bytes)
+  📄 onsite.tsx                               (  4536 bytes)
+  📄 patients.tsx                             (  3864 bytes)
+  📄 prescriptions.tsx                        (  3983 bytes)
+  📄 reports.tsx                              ( 17245 bytes)
+  📄 settings.tsx                             (  1587 bytes)
+  📄 about-doctor.tsx                         (  5060 bytes)
+  📄 contact-info.tsx                         (  6227 bytes)
+  📄 hero-section.tsx                         (  3789 bytes)
+  📄 index.tsx                                (  2928 bytes)
+  📄 services.tsx                             (  4104 bytes)
+  📄 testimonials.tsx                         (  5670 bytes)
+  📄 login.tsx                                (  3297 bytes)
+  📄 recover-password.tsx                     (  3285 bytes)
+  📄 reset-password.tsx                       (  4573 bytes)
+  📄 signup.tsx                               (  5220 bytes)
+  📄 financeApi.ts                            (  9224 bytes)
+  📄 utils.ts                                 (   706 bytes)
+  📄 vite-env.d.ts                            (   155 bytes)
+
+📁 TSCONFIG.BUILD.JSON
+----------------------------------------
+  📄 tsconfig.build.json                      (    67 bytes)
+
+📁 TSCONFIG.JSON
+----------------------------------------
+  📄 tsconfig.json                            (   754 bytes)
+
+📁 TSCONFIG.NODE.JSON
+----------------------------------------
+  📄 tsconfig.node.json                       (   213 bytes)
+
+📁 VERCEL.JSON
+----------------------------------------
+  📄 vercel.json                              (    79 bytes)
+
+📁 VITE.CONFIG.TS
+----------------------------------------
+  📄 vite.config.ts                           (   665 bytes)
+
+
+================================================================================
+SECTION SUMMARY
+================================================================================
+
+.GITHUB                1 files     5,619 bytes
+README.MD              1 files     2,936 bytes
+BIOME.JSON             1 files       995 bytes
+COMPONENTS.JSON        1 files       446 bytes
+INDEX.HTML             1 files       454 bytes
+OPENAPI-TS.CONFIG.TS   1 files       373 bytes
+PACKAGE-LOCK.JSON      1 files   244,193 bytes
+PACKAGE.JSON           1 files     2,190 bytes
+PLAYWRIGHT.CONFIG.TS   1 files     2,480 bytes
+SRC                  210 files  1,699,792 bytes
+TSCONFIG.BUILD.JSON    1 files        67 bytes
+TSCONFIG.JSON          1 files       754 bytes
+TSCONFIG.NODE.JSON     1 files       213 bytes
+VERCEL.JSON            1 files        79 bytes
+VITE.CONFIG.TS         1 files       665 bytes
