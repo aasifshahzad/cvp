@@ -18,7 +18,7 @@ def create_superuser(session: Session) -> None:
     """Create initial superuser account"""
     # Check if superuser already exists
     existing_superuser = session.exec(
-        select(User).where(User.email == "admin@homoeomed.com")
+        select(User).where(User.email == "admin@cvp.com")
     ).first()
     
     if existing_superuser:
@@ -26,14 +26,14 @@ def create_superuser(session: Session) -> None:
         return
     
     superuser = User(
-        email="admin@homoeomed.com",
+        email="admin@cvp.com",
         full_name="System Administrator",
         hashed_password=get_password_hash("Admin@123"),  # Change this in production!
         role=UserRole.ADMIN,
         phone="+1234567890",
         specialization="System Administration",
         registration_number="ADMIN001",
-        clinic_name="HomoeoMed Headquarters",
+        clinic_name="CVP Headquarters",
         clinic_address="123 Main Street, City, Country",
         consultation_fee=0.0,
         is_active=True,
@@ -50,7 +50,7 @@ def create_superuser(session: Session) -> None:
 def create_sample_doctor(session: Session) -> None:
     """Create sample doctor account"""
     existing_doctor = session.exec(
-        select(User).where(User.email == "doctor@homoeomed.com")
+        select(User).where(User.email == "doctor@cvp.com")
     ).first()
     
     if existing_doctor:
@@ -58,15 +58,15 @@ def create_sample_doctor(session: Session) -> None:
         return
     
     doctor = User(
-        email="doctor@homoeomed.com",
+        email="doctor@cvp.com",
         full_name="Dr. John Smith",
         hashed_password=get_password_hash("Doctor@123"),
         role=UserRole.DOCTOR,
         phone="+1234567891",
         specialization="Homeopathy",
         registration_number="HOM001",
-        clinic_name="Smith Homeopathy Clinic",
-        clinic_address="456 Health Street, City, Country",
+        clinic_name="CVP Headquarters",
+        clinic_address="123 Main Street, City, Country",
         consultation_fee=50.0,
         is_active=True,
         is_verified=True,
@@ -83,7 +83,7 @@ def create_sample_doctor(session: Session) -> None:
 def create_sample_staff(session: Session) -> None:
     """Create sample staff account"""
     existing_staff = session.exec(
-        select(User).where(User.email == "staff@homoeomed.com")
+        select(User).where(User.email == "staff@cvp.com")
     ).first()
     
     if existing_staff:
@@ -91,15 +91,15 @@ def create_sample_staff(session: Session) -> None:
         return
     
     staff = User(
-        email="staff@homoeomed.com",
+        email="staff@cvp.com",
         full_name="Sarah Johnson",
         hashed_password=get_password_hash("Staff@123"),
         role=UserRole.STAFF,
         phone="+1234567892",
         specialization="Clinic Management",
         registration_number="STAFF001",
-        clinic_name="Smith Homeopathy Clinic",
-        clinic_address="456 Health Street, City, Country",
+        clinic_name="CVP Headquarters",
+        clinic_address="123 Main Street, City, Country",
         consultation_fee=0.0,
         is_active=True,
         is_verified=True,
@@ -117,28 +117,43 @@ def create_common_medicines(session: Session) -> None:
     common_medicines = [
         {
             "name": "Arnica Montana",
-            "abbreviation": "Arn",
-            "notes": "For trauma, bruises, and shock"
+            "potency": "30",
+            "potency_scale": "C",
+            "form": "Globules",
+            "manufacturer": "Standard Homeopathic",
+            "description": "For trauma, bruises, and shock"
         },
         {
             "name": "Belladonna",
-            "abbreviation": "Bell",
-            "notes": "For sudden, intense conditions with heat"
+            "potency": "30",
+            "potency_scale": "C",
+            "form": "Globules",
+            "manufacturer": "Standard Homeopathic",
+            "description": "For sudden, intense conditions with heat"
         },
         {
             "name": "Nux Vomica",
-            "abbreviation": "Nux-v",
-            "notes": "For digestive issues and stress"
+            "potency": "30",
+            "potency_scale": "C",
+            "form": "Globules",
+            "manufacturer": "Standard Homeopathic",
+            "description": "For digestive issues and stress"
         },
         {
             "name": "Pulsatilla",
-            "abbreviation": "Puls",
-            "notes": "For changeable symptoms, gentle disposition"
+            "potency": "30",
+            "potency_scale": "C",
+            "form": "Globules",
+            "manufacturer": "Standard Homeopathic",
+            "description": "For changeable symptoms, gentle disposition"
         },
         {
             "name": "Sulphur",
-            "abbreviation": "Sulph",
-            "notes": "For skin conditions and heat"
+            "potency": "30",
+            "potency_scale": "C",
+            "form": "Globules",
+            "manufacturer": "Standard Homeopathic",
+            "description": "For skin conditions and heat"
         }
     ]
     
