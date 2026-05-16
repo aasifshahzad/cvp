@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { DoctorCard } from "@/components/doctors/DoctorCard";
 import { SearchBar } from "@/components/doctors/SearchBar";
@@ -9,6 +9,24 @@ import { api } from "@/lib/api";
 import { Loader2 } from "lucide-react";
 
 export default function DoctorsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-background py-12">
+          <div className="container-custom">
+            <div className="flex justify-center items-center py-20">
+              <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            </div>
+          </div>
+        </div>
+      }
+    >
+      <DoctorsPageContent />
+    </Suspense>
+  );
+}
+
+function DoctorsPageContent() {
   const searchParams = useSearchParams();
   const [doctors, setDoctors] = useState<Doctor[]>([]);
   const [loading, setLoading] = useState(true);

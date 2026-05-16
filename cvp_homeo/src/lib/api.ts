@@ -27,16 +27,10 @@ apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response) {
-      // Server responded with error
-      console.error("API Error:", error.response.data);
       throw new Error(error.response.data.detail || "An error occurred");
     } else if (error.request) {
-      // Request made but no response
-      console.error("Network Error:", error.request);
       throw new Error("Network error. Please check your connection.");
     } else {
-      // Something else happened
-      console.error("Error:", error.message);
       throw new Error(error.message);
     }
   },
