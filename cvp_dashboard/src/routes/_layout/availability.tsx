@@ -130,4 +130,3 @@ function Availability() {
     )
 }
 
-export default Availability

@@ -178,6 +178,7 @@ allowed_origins = [
     "http://localhost:5173",
     "http://localhost:8080",
     "http://localhost:3000",
+    "http://localhost:3001",
 ]
 
 # Add any additional origins from environment if configured
