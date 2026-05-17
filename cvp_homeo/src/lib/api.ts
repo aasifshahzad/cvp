@@ -8,12 +8,16 @@ import type {
   RegistrationResponse,
   HeroSection,
   Service,
+  ServicesSectionData,
   AboutDoctor,
   Testimonial,
+  TestimonialsData,
+  ContactInfoData,
+  AvailabilityResponse,
   DoctorAvailability,
 } from "./types";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const apiClient = axios.create({
   baseURL: API_URL,
@@ -93,26 +97,52 @@ export const api = {
     },
   },
 
-  // Web content endpoints
+  // Web content endpoints (matching old doctor code API pattern)
   webContent: {
     getHero: async (doctorId: string): Promise<HeroSection> => {
-      const response = await apiClient.get(`/web_content/${doctorId}/hero`);
+      const response = await apiClient.get(
+        `/web-content/hero-section-public/${doctorId}`,
+      );
       return response.data;
     },
 
-    getServices: async (doctorId: string): Promise<Service[]> => {
-      const response = await apiClient.get(`/web_content/${doctorId}/services`);
+    getServices: async (doctorId: string): Promise<ServicesSectionData> => {
+      const response = await apiClient.get(
+        `/web-content/services-public/${doctorId}`,
+      );
       return response.data;
     },
 
     getAbout: async (doctorId: string): Promise<AboutDoctor> => {
-      const response = await apiClient.get(`/web_content/${doctorId}/about`);
+      const response = await apiClient.get(
+        `/web-content/about-doctor-public/${doctorId}`,
+      );
       return response.data;
     },
 
-    getTestimonials: async (doctorId: string): Promise<Testimonial[]> => {
+    getTestimonials: async (doctorId: string): Promise<TestimonialsData> => {
       const response = await apiClient.get(
-        `/web_content/${doctorId}/testimonials`,
+        `/web-content/testimonials-public/${doctorId}`,
+      );
+      return response.data;
+    },
+
+    getContact: async (doctorId: string): Promise<ContactInfoData> => {
+      const response = await apiClient.get(
+        `/web-content/contact-info-public/${doctorId}`,
+      );
+      return response.data;
+    },
+  },
+
+  // Availability endpoints
+  availability: {
+    getSlots: async (
+      doctorId: string,
+      date: string,
+    ): Promise<AvailabilityResponse> => {
+      const response = await apiClient.get(
+        `/public/availability/${doctorId}?date=${date}`,
       );
       return response.data;
     },

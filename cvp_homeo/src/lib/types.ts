@@ -9,11 +9,15 @@ export interface Doctor {
   qualification: string;
   years_of_experience: number;
   specialties: string[];
+  specialization?: string;
   profile_photo?: string;
   rating?: number;
   slug: string;
   is_approved: boolean;
   created_at: string;
+  consultation_fee?: number;
+  phone?: string;
+  clinic_address?: string;
 }
 
 export interface DoctorListParams {
@@ -70,42 +74,86 @@ export interface RegistrationResponse {
   message: string;
 }
 
-// Web Content Types
+// Web Content Types (Old API Pattern - from web-content endpoints)
 export interface HeroSection {
-  id: string;
-  doctor_id: string;
-  background_image?: string;
-  tagline?: string;
-  years_experience?: number;
-  patients_served?: number;
-  success_rate?: number;
+  id: number;
+  title: string;
+  subtitle: string;
+  description: string;
+  credentials: Array<{
+    id: number;
+    value: string;
+    label: string;
+  }>;
 }
 
 export interface Service {
-  id: string;
-  doctor_id: string;
-  name: string;
+  id: number;
+  title: string;
   description: string;
-  image?: string;
-  order: number;
+  image_url?: string;
+}
+
+export interface ServicesSectionData {
+  id: number;
+  title: string;
+  services: Service[];
 }
 
 export interface AboutDoctor {
-  id: string;
-  doctor_id: string;
-  biography: string;
-  qualifications: string[];
-  specializations: string[];
-  photo?: string;
+  id: number;
+  title: string;
+  experience_title: string;
+  experience_description: string;
+  qualifications: Array<{
+    id: number;
+    qualification_text: string;
+  }>;
+  specializations: Array<{
+    id: number;
+    specialization_text: string;
+  }>;
 }
 
 export interface Testimonial {
-  id: string;
-  doctor_id: string;
-  patient_name: string;
+  id: number;
+  name: string;
+  city: string;
   rating: number;
-  text: string;
+  message: string;
+  is_approved: boolean;
+}
+
+export interface TestimonialsData {
+  id: number;
+  title: string;
+  testimonials: Testimonial[];
+}
+
+export interface ContactInfoData {
+  id: number;
+  phone_primary: string;
+  phone_secondary?: string;
+  whatsapp_number?: string;
+  email: string;
+  clinic_address: string;
+  city: string;
+  working_hours: string;
+}
+
+export interface AvailabilitySlot {
+  start: string;
+  end: string;
+  booked: boolean;
+}
+
+export interface AvailabilityResponse {
   date: string;
+  available_slots: AvailabilitySlot[];
+  doctor: Doctor & {
+    consultation_fee?: number;
+    specialization?: string;
+  };
 }
 
 export interface DoctorAvailability {

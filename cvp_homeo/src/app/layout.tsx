@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { playfair, inter } from "@/lib/fonts";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -57,9 +55,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <body className={inter.className}>
-        <Navbar />
-        <main className="min-h-screen pt-20">{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );

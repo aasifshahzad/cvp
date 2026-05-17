@@ -66,13 +66,12 @@ export function DoctorCard({ doctor }: DoctorCardProps) {
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className={`h-4 w-4 ${
-                    i < fullStars
-                      ? "fill-accent text-accent"
-                      : i === fullStars && hasHalfStar
-                        ? "fill-accent/50 text-accent"
-                        : "fill-gray-200 text-gray-200"
-                  }`}
+                  className={`h-4 w-4 ${i < fullStars
+                    ? "fill-accent text-accent"
+                    : i === fullStars && hasHalfStar
+                      ? "fill-accent/50 text-accent"
+                      : "fill-gray-200 text-gray-200"
+                    }`}
                 />
               ))}
             </div>
@@ -104,13 +103,13 @@ export function DoctorCard({ doctor }: DoctorCardProps) {
         )}
 
         {/* Action Buttons */}
-        <div className="flex gap-3 pt-2">
-          <Link href={`/dr-${doctor.slug}`} className="flex-1">
+        <div className="flex flex-col gap-2 pt-2">
+          <Link href={`/doctor/${doctor.id}`} className="w-full">
             <Button variant="primary" className="w-full">
               View Profile
             </Button>
           </Link>
-          <Link href={`/dr-${doctor.slug}#book`} className="flex-1">
+          <Link href={`/doctor/${doctor.id}#booking`} className="w-full">
             <Button variant="secondary" className="w-full">
               Book Appointment
             </Button>
