@@ -101,8 +101,8 @@ class Settings(BaseSettings):
         self._check_default_secret(
             "FIRST_SUPERUSER_PASSWORD", self.FIRST_SUPERUSER_PASSWORD
         )
-        if len(self.FIRST_SUPERUSER_PASSWORD) < 12:
-            raise ValueError("FIRST_SUPERUSER_PASSWORD must be at least 12 characters")
+        if len(self.FIRST_SUPERUSER_PASSWORD) < 8:
+            raise ValueError("FIRST_SUPERUSER_PASSWORD must be at least 8 characters")
         return self
 
 
