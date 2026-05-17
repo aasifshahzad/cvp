@@ -3,6 +3,7 @@
 # # INFO:__main__:Initial data created
 import logging
 from datetime import date
+from uuid import UUID
 from sqlmodel import Session, select
 
 from core.db import engine
@@ -28,7 +29,7 @@ def create_superuser(session: Session) -> None:
     superuser = User(
         email="admin@cvp.com",
         full_name="System Administrator",
-        hashed_password=get_password_hash("Admin@123"),  # Change this in production!
+        hashed_password=get_password_hash("Admin@123456"),  # Change this in production!
         role=UserRole.ADMIN,
         phone="+1234567890",
         specialization="System Administration",
@@ -38,6 +39,7 @@ def create_superuser(session: Session) -> None:
         consultation_fee=0.0,
         is_active=True,
         is_verified=True,
+        is_approved=True,  # Admin is auto-approved
         is_superuser=True,
         join_date=date.today()
     )
@@ -47,7 +49,7 @@ def create_superuser(session: Session) -> None:
     logger.info(f"Superuser created: {superuser.email}")
 
 
-def create_sample_doctor(session: Session) -> None:
+def create_sample_doctor(session: Session) -> UUID | None:
     """Create sample doctor account"""
     existing_doctor = session.exec(
         select(User).where(User.email == "doctor@cvp.com")
@@ -55,7 +57,7 @@ def create_sample_doctor(session: Session) -> None:
     
     if existing_doctor:
         logger.info("Sample doctor already exists")
-        return
+        return None
     
     doctor = User(
         email="doctor@cvp.com",
@@ -70,6 +72,7 @@ def create_sample_doctor(session: Session) -> None:
         consultation_fee=50.0,
         is_active=True,
         is_verified=True,
+        is_approved=True,  # Sample doctor is pre-approved
         is_superuser=False,
         join_date=date.today()
     )
@@ -103,6 +106,7 @@ def create_sample_staff(session: Session) -> None:
         consultation_fee=0.0,
         is_active=True,
         is_verified=True,
+        is_approved=True,  # Sample staff is pre-approved
         is_superuser=False,
         join_date=date.today()
     )
@@ -163,7 +167,15 @@ def create_common_medicines(session: Session) -> None:
         ).first()
         
         if not existing:
-            medicine = Medicine(**medicine_data)
+            medicine = Medicine(
+                name=medicine_data["name"],
+                potency=medicine_data["potency"],
+                potency_scale=medicine_data["potency_scale"],
+                form=medicine_data["form"],
+                manufacturer=medicine_data["manufacturer"],
+                description=medicine_data["description"],
+                is_verified=True  # Pre-seeded medicines are verified
+            )
             session.add(medicine)
     
     session.commit()
