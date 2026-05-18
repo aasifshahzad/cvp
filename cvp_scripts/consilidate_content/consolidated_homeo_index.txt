@@ -1,0 +1,209 @@
+================================================================================
+HOMEO FILES INDEX
+================================================================================
+
+
+📁 .ESLINTRC.JSON
+----------------------------------------
+  📄 .eslintrc.json                           (    92 bytes)
+
+📁 .NEXT
+----------------------------------------
+  📄 app-build-manifest.json                  (   485 bytes)
+  📄 build-manifest.json                      (   388 bytes)
+  📄 package.json                             (    20 bytes)
+  📄 react-loadable-manifest.json             (   512 bytes)
+  📄 app-paths-manifest.json                  (    52 bytes)
+  📄 page.js                                  (489364 bytes)
+  📄 page_client-reference-manifest.js        ( 13098 bytes)
+  📄 interception-route-rewrite-manifest.js   (    47 bytes)
+  📄 middleware-build-manifest.js             (   501 bytes)
+  📄 middleware-manifest.json                 (    83 bytes)
+  📄 middleware-react-loadable-manifest.js    (   559 bytes)
+  📄 next-font-manifest.js                    (   113 bytes)
+  📄 next-font-manifest.json                  (    77 bytes)
+  📄 pages-manifest.json                      (     2 bytes)
+  📄 server-reference-manifest.js             (   140 bytes)
+  📄 server-reference-manifest.json           (    97 bytes)
+  📄 @swc.js                                  (  9938 bytes)
+  📄 agent-base.js                            ( 24457 bytes)
+  📄 asynckit.js                              ( 32718 bytes)
+  📄 axios.js                                 (637965 bytes)
+  📄 call-bind-apply-helpers.js               (  8863 bytes)
+  📄 class-variance-authority.js              ( 18909 bytes)
+  📄 clsx.js                                  (  5029 bytes)
+  📄 combined-stream.js                       ( 14458 bytes)
+  📄 debug.js                                 ( 56810 bytes)
+  📄 delayed-stream.js                        (  7950 bytes)
+  📄 dunder-proto.js                          (  4281 bytes)
+  📄 es-define-property.js                    (  2308 bytes)
+  📄 es-errors.js                             (  7039 bytes)
+  📄 es-object-atoms.js                       (  1627 bytes)
+  📄 es-set-tostringtag.js                    (  5146 bytes)
+  📄 follow-redirects.js                      ( 59895 bytes)
+  📄 form-data.js                             ( 42243 bytes)
+  📄 function-bind.js                         (  8243 bytes)
+  📄 get-intrinsic.js                         ( 42173 bytes)
+  📄 get-proto.js                             (  6605 bytes)
+  📄 gopd.js                                  (  3015 bytes)
+  📄 has-flag.js                              (  2205 bytes)
+  📄 has-symbols.js                           (  8590 bytes)
+  📄 has-tostringtag.js                       (  2092 bytes)
+  📄 hasown.js                                (  2039 bytes)
+  📄 https-proxy-agent.js                     ( 32465 bytes)
+  📄 lucide-react.js                          (127070 bytes)
+  📄 math-intrinsics.js                       (  8962 bytes)
+  📄 mime-db.js                               (148445 bytes)
+  📄 mime-types.js                            ( 11815 bytes)
+  📄 ms.js                                    (  9885 bytes)
+  📄 next.js                                  (3590257 bytes)
+  📄 proxy-from-env.js                        ( 10138 bytes)
+  📄 supports-color.js                        (  9557 bytes)
+  📄 tailwind-merge.js                        (400441 bytes)
+  📄 webpack-runtime.js                       (  8689 bytes)
+  📄 _app-pages-browser_node_modules_next_dist_client_dev_noop-turbopack-hmr_js.js (  6405 bytes)
+  📄 app-pages-internals.js                   (328534 bytes)
+  📄 layout.js                                (531488 bytes)
+  📄 page.js                                  (1249596 bytes)
+  📄 layout.js                                ( 34623 bytes)
+  📄 main-app.js                              (6379516 bytes)
+  📄 polyfills.js                             (112594 bytes)
+  📄 webpack.js                               ( 56194 bytes)
+  📄 layout.css                               ( 60656 bytes)
+  📄 _buildManifest.js                        (   238 bytes)
+  📄 _ssgManifest.js                          (    76 bytes)
+  📄 633457081244afec._.hot-update.json       (    22 bytes)
+  📄 a4b454d47fd79707.webpack.hot-update.json (    44 bytes)
+  📄 layout.a4b454d47fd79707.hot-update.js    (  1835 bytes)
+  📄 webpack.a4b454d47fd79707.hot-update.js   (   839 bytes)
+  📄 layout.ts                                (  3756 bytes)
+  📄 page.ts                                  (  3744 bytes)
+  📄 layout.ts                                (  3714 bytes)
+  📄 cache-life.d.ts                          (  5864 bytes)
+  📄 package.json                             (    18 bytes)
+
+📁 COMPONENT_ARCHITECTURE.MD
+----------------------------------------
+  📄 COMPONENT_ARCHITECTURE.md                ( 17559 bytes)
+
+📁 CVP_HOMEO_MARKETING_WEBSITE_PLAN.MD
+----------------------------------------
+  📄 CVP_Homeo_Marketing_Website_Plan.md      ( 36829 bytes)
+
+📁 IMPLEMENTATION_PLAN.MD
+----------------------------------------
+  📄 IMPLEMENTATION_PLAN.md                   ( 23102 bytes)
+
+📁 QUICK_START_GUIDE.MD
+----------------------------------------
+  📄 QUICK_START_GUIDE.md                     ( 13890 bytes)
+
+📁 README.MD
+----------------------------------------
+  📄 README.md                                (  4526 bytes)
+
+📁 NEXT-ENV.D.TS
+----------------------------------------
+  📄 next-env.d.ts                            (   211 bytes)
+
+📁 NEXT.CONFIG.JS
+----------------------------------------
+  📄 next.config.js                           (   435 bytes)
+
+📁 PACKAGE-LOCK.JSON
+----------------------------------------
+  📄 package-lock.json                        (268396 bytes)
+
+📁 PACKAGE.JSON
+----------------------------------------
+  📄 package.json                             (  1238 bytes)
+
+📁 POSTCSS.CONFIG.JS
+----------------------------------------
+  📄 postcss.config.js                        (   101 bytes)
+
+📁 SRC
+----------------------------------------
+  📄 page.tsx                                 ( 18139 bytes)
+  📄 page.tsx                                 ( 16521 bytes)
+  📄 page.tsx                                 ( 24608 bytes)
+  📄 page.tsx                                 (  6149 bytes)
+  📄 page.tsx                                 (  5973 bytes)
+  📄 page.tsx                                 ( 12494 bytes)
+  📄 page.tsx                                 ( 23026 bytes)
+  📄 page.tsx                                 ( 10540 bytes)
+  📄 layout.tsx                               (   456 bytes)
+  📄 page.tsx                                 (   678 bytes)
+  📄 page.tsx                                 ( 26207 bytes)
+  📄 page.tsx                                 (  4275 bytes)
+  📄 page.tsx                                 ( 35506 bytes)
+  📄 layout.tsx                               (  7135 bytes)
+  📄 page.tsx                                 (  5122 bytes)
+  📄 globals.css                              (  2958 bytes)
+  📄 layout.tsx                               (  1707 bytes)
+  📄 DoctorCard.tsx                           (  4162 bytes)
+  📄 SearchBar.tsx                            (  1980 bytes)
+  📄 FeaturedDoctors.tsx                      (  4340 bytes)
+  📄 FinalCTA.tsx                             (  2414 bytes)
+  📄 Hero.tsx                                 (  4203 bytes)
+  📄 HowItWorks.tsx                           (  5081 bytes)
+  📄 PlatformFeatures.tsx                     (  3641 bytes)
+  📄 StatsBar.tsx                             (  2222 bytes)
+  📄 WebsiteSpotlight.tsx                     (  5696 bytes)
+  📄 Footer.tsx                               (  4610 bytes)
+  📄 Navbar.tsx                               (  4410 bytes)
+  📄 AboutSection.tsx                         (  3572 bytes)
+  📄 BookingForm.tsx                          (  6843 bytes)
+  📄 BookingSection.tsx                       (  8649 bytes)
+  📄 ContactSection.tsx                       (  8943 bytes)
+  📄 ProfileHero.tsx                          (  4757 bytes)
+  📄 ServicesSection.tsx                      (  2663 bytes)
+  📄 TestimonialsSection.tsx                  (  2937 bytes)
+  📄 WhatsAppButton.tsx                       (  3912 bytes)
+  📄 ProgressIndicator.tsx                    (  2116 bytes)
+  📄 Step1Personal.tsx                        (  3005 bytes)
+  📄 Step2Practice.tsx                        (  4853 bytes)
+  📄 Step3Review.tsx                          (  5839 bytes)
+  📄 SuccessState.tsx                         (  2905 bytes)
+  📄 Badge.tsx                                (  1177 bytes)
+  📄 Button.tsx                               (  1676 bytes)
+  📄 Card.tsx                                 (  2623 bytes)
+  📄 Input.tsx                                (  1020 bytes)
+  📄 Label.tsx                                (   674 bytes)
+  📄 Select.tsx                               (   979 bytes)
+  📄 Textarea.tsx                             (  1058 bytes)
+  📄 api.ts                                   (  3960 bytes)
+  📄 constants.ts                             (  2308 bytes)
+  📄 fonts.ts                                 (   353 bytes)
+  📄 types.ts                                 (  3789 bytes)
+  📄 utils.ts                                 (   895 bytes)
+  📄 validations.ts                           (  1561 bytes)
+
+📁 TAILWIND.CONFIG.TS
+----------------------------------------
+  📄 tailwind.config.ts                       (  1118 bytes)
+
+📁 TSCONFIG.JSON
+----------------------------------------
+  📄 tsconfig.json                            (   620 bytes)
+
+
+================================================================================
+SECTION SUMMARY
+================================================================================
+
+.ESLINTRC.JSON         1 files        92 bytes
+.NEXT                 72 files  14,657,616 bytes
+COMPONENT_ARCHITECTURE.MD   1 files    17,559 bytes
+CVP_HOMEO_MARKETING_WEBSITE_PLAN.MD   1 files    36,829 bytes
+IMPLEMENTATION_PLAN.MD   1 files    23,102 bytes
+QUICK_START_GUIDE.MD   1 files    13,890 bytes
+README.MD              1 files     4,526 bytes
+NEXT-ENV.D.TS          1 files       211 bytes
+NEXT.CONFIG.JS         1 files       435 bytes
+PACKAGE-LOCK.JSON      1 files   268,396 bytes
+PACKAGE.JSON           1 files     1,238 bytes
+POSTCSS.CONFIG.JS      1 files       101 bytes
+SRC                   54 files   327,320 bytes
+TAILWIND.CONFIG.TS     1 files     1,118 bytes
+TSCONFIG.JSON          1 files       620 bytes

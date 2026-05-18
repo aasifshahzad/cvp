@@ -30,8 +30,8 @@ export function Step2Practice({ form, onNext, onBack }: Step2PracticeProps) {
   const handleNext = async () => {
     const isValid = await trigger([
       "clinic_name",
-      "city",
-      "qualification",
+      "clinic_address",
+      "registration_number",
       "years_of_experience",
       "specialties",
     ]);
@@ -75,35 +75,33 @@ export function Step2Practice({ form, onNext, onBack }: Step2PracticeProps) {
         </div>
 
         <div>
-          <Label htmlFor="city" required>
-            City
+          <Label htmlFor="clinic_address" required>
+            Clinic Address
           </Label>
-          <Select id="city" {...register("city")} error={errors.city?.message}>
-            <option value="">Select a city</option>
-            {CITIES.map((city) => (
-              <option key={city.value} value={city.value}>
-                {city.label}
-              </option>
-            ))}
-          </Select>
+          <Input
+            id="clinic_address"
+            placeholder="123 Main Street, Karachi"
+            {...register("clinic_address")}
+            error={errors.clinic_address?.message}
+          />
+          <p className="text-xs text-gray-500 mt-1">
+            Include street address and city
+          </p>
         </div>
 
         <div>
-          <Label htmlFor="qualification" required>
-            Qualification
+          <Label htmlFor="registration_number" required>
+            Medical Registration Number
           </Label>
-          <Select
-            id="qualification"
-            {...register("qualification")}
-            error={errors.qualification?.message}
-          >
-            <option value="">Select qualification</option>
-            {QUALIFICATIONS.map((qual) => (
-              <option key={qual.value} value={qual.value}>
-                {qual.label}
-              </option>
-            ))}
-          </Select>
+          <Input
+            id="registration_number"
+            placeholder="e.g., PMC-12345 or BHMS"
+            {...register("registration_number")}
+            error={errors.registration_number?.message}
+          />
+          <p className="text-xs text-gray-500 mt-1">
+            Your medical council registration or qualification
+          </p>
         </div>
 
         <div>

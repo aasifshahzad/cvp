@@ -1,20 +1,29 @@
 "use client";
 
 import Link from "next/link";
-import { Star, MapPin, Briefcase } from "lucide-react";
+import { Star, MapPin, Briefcase, Stethoscope } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
-import { Doctor } from "@/lib/types";
+import { Doctor, DoctorPublicInfo } from "@/lib/types";
 
 interface DoctorCardProps {
-  doctor: Doctor;
+  doctor: Doctor | DoctorPublicInfo;
 }
 
 export function DoctorCard({ doctor }: DoctorCardProps) {
-  const rating = doctor.rating || 0;
+  // Handle both legacy Doctor type and new DoctorPublicInfo type
+  const rating = "rating" in doctor ? doctor.rating || 0 : 0;
   const fullStars = Math.floor(rating);
   const hasHalfStar = rating % 1 >= 0.5;
+  const profilePhoto =
+    "profile_photo" in doctor ? doctor.profile_photo : undefined;
+  const qualification =
+    "qualification" in doctor ? doctor.qualification : undefined;
+  const city = "city" in doctor ? doctor.city : undefined;
+  const yearsOfExperience =
+    "years_of_experience" in doctor ? doctor.years_of_experience : undefined;
+  const specialties = "specialties" in doctor ? doctor.specialties : undefined;
 
   return (
     <Card className="hover:shadow-lg transition-shadow duration-200">
@@ -24,9 +33,9 @@ export function DoctorCard({ doctor }: DoctorCardProps) {
           {/* Profile Photo */}
           <div className="flex-shrink-0">
             <div className="w-20 h-20 rounded-full bg-surface flex items-center justify-center overflow-hidden">
-              {doctor.profile_photo ? (
+              {profilePhoto ? (
                 <img
-                  src={doctor.profile_photo}
+                  src={profilePhoto}
                   alt={doctor.full_name}
                   className="w-full h-full object-cover"
                 />
@@ -43,18 +52,30 @@ export function DoctorCard({ doctor }: DoctorCardProps) {
             <h3 className="text-lg font-semibold text-gray-900 truncate">
               {doctor.full_name}
             </h3>
-            <p className="text-sm text-gray-600">{doctor.qualification}</p>
+            {qualification && (
+              <p className="text-sm text-gray-600">{qualification}</p>
+            )}
+            {doctor.specialization && (
+              <div className="flex items-center gap-1 mt-1 text-sm text-gray-600">
+                <Stethoscope className="h-3 w-3" />
+                <span>{doctor.specialization}</span>
+              </div>
+            )}
 
             {/* Location & Experience */}
             <div className="flex items-center gap-4 mt-2 text-sm text-gray-500">
-              <div className="flex items-center gap-1">
-                <MapPin className="h-4 w-4" />
-                <span className="capitalize">{doctor.city}</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <Briefcase className="h-4 w-4" />
-                <span>{doctor.years_of_experience} years</span>
-              </div>
+              {city && (
+                <div className="flex items-center gap-1">
+                  <MapPin className="h-4 w-4" />
+                  <span className="capitalize">{city}</span>
+                </div>
+              )}
+              {yearsOfExperience && (
+                <div className="flex items-center gap-1">
+                  <Briefcase className="h-4 w-4" />
+                  <span>{yearsOfExperience} years</span>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -66,12 +87,13 @@ export function DoctorCard({ doctor }: DoctorCardProps) {
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className={`h-4 w-4 ${i < fullStars
-                    ? "fill-accent text-accent"
-                    : i === fullStars && hasHalfStar
-                      ? "fill-accent/50 text-accent"
-                      : "fill-gray-200 text-gray-200"
-                    }`}
+                  className={`h-4 w-4 ${
+                    i < fullStars
+                      ? "fill-accent text-accent"
+                      : i === fullStars && hasHalfStar
+                        ? "fill-accent/50 text-accent"
+                        : "fill-gray-200 text-gray-200"
+                  }`}
                 />
               ))}
             </div>
@@ -80,27 +102,35 @@ export function DoctorCard({ doctor }: DoctorCardProps) {
         )}
 
         {/* Specialties */}
-        {doctor.specialties && doctor.specialties.length > 0 && (
+        {specialties && specialties.length > 0 && (
           <div className="flex flex-wrap gap-2">
-            {doctor.specialties.slice(0, 3).map((specialty) => (
+            {specialties.slice(0, 3).map((specialty) => (
               <Badge key={specialty} variant="gray" className="text-xs">
                 {specialty}
               </Badge>
             ))}
-            {doctor.specialties.length > 3 && (
+            {specialties.length > 3 && (
               <Badge variant="gray" className="text-xs">
-                +{doctor.specialties.length - 3} more
+                +{specialties.length - 3} more
               </Badge>
             )}
           </div>
         )}
 
-        {/* Clinic Name */}
-        {doctor.clinic_name && (
-          <p className="text-sm text-gray-600">
-            <span className="font-medium">Clinic:</span> {doctor.clinic_name}
-          </p>
-        )}
+        {/* Clinic Name & Fee */}
+        <div className="space-y-1">
+          {doctor.clinic_name && (
+            <p className="text-sm text-gray-600">
+              <span className="font-medium">Clinic:</span> {doctor.clinic_name}
+            </p>
+          )}
+          {doctor.consultation_fee && (
+            <p className="text-sm text-gray-600">
+              <span className="font-medium">Fee:</span> Rs.{" "}
+              {doctor.consultation_fee}
+            </p>
+          )}
+        </div>
 
         {/* Action Buttons */}
         <div className="flex flex-col gap-2 pt-2">

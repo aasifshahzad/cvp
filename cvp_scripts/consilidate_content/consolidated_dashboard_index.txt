@@ -7,9 +7,13 @@ DASHBOARD FILES INDEX
 ----------------------------------------
   📄 copilot-instructions.md                  (  5619 bytes)
 
+📁 FRONTEND_ARCHITECTURE_AND_WORKFLOWS.MD
+----------------------------------------
+  📄 FRONTEND_ARCHITECTURE_AND_WORKFLOWS.md   ( 24013 bytes)
+
 📁 README.MD
 ----------------------------------------
-  📄 README.md                                (  2936 bytes)
+  📄 README.md                                (  4701 bytes)
 
 📁 BIOME.JSON
 ----------------------------------------
@@ -25,15 +29,15 @@ DASHBOARD FILES INDEX
 
 📁 OPENAPI-TS.CONFIG.TS
 ----------------------------------------
-  📄 openapi-ts.config.ts                     (   373 bytes)
+  📄 openapi-ts.config.ts                     (   813 bytes)
 
 📁 PACKAGE-LOCK.JSON
 ----------------------------------------
-  📄 package-lock.json                        (244193 bytes)
+  📄 package-lock.json                        (235801 bytes)
 
 📁 PACKAGE.JSON
 ----------------------------------------
-  📄 package.json                             (  2190 bytes)
+  📄 package.json                             (  2153 bytes)
 
 📁 PLAYWRIGHT.CONFIG.TS
 ----------------------------------------
@@ -54,32 +58,19 @@ DASHBOARD FILES INDEX
   📄 PrescriptionsService.ts                  (  6215 bytes)
   📄 ReportsService.ts                        (  5171 bytes)
   📄 WebContentService.ts                     ( 13201 bytes)
-  📄 client.gen.ts                            (   850 bytes)
-  📄 client.gen.ts                            (  8034 bytes)
-  📄 index.ts                                 (   732 bytes)
-  📄 types.gen.ts                             (  6897 bytes)
-  📄 utils.gen.ts                             (  8570 bytes)
   📄 ApiError.ts                              (   611 bytes)
   📄 ApiRequestOptions.ts                     (   617 bytes)
   📄 ApiResult.ts                             (   166 bytes)
   📄 CancelablePromise.ts                     (  3258 bytes)
   📄 OpenAPI.ts                               (  1477 bytes)
-  📄 auth.gen.ts                              (   864 bytes)
-  📄 bodySerializer.gen.ts                    (  2523 bytes)
-  📄 params.gen.ts                            (  4070 bytes)
-  📄 pathSerializer.gen.ts                    (  4257 bytes)
-  📄 queryKeySerializer.gen.ts                (  2974 bytes)
-  📄 request.ts                               (  9598 bytes)
-  📄 serverSentEvents.gen.ts                  (  7406 bytes)
-  📄 types.gen.ts                             (  3360 bytes)
-  📄 utils.gen.ts                             (  3415 bytes)
-  📄 index.ts                                 ( 42748 bytes)
-  📄 schemas.gen.ts                           (146509 bytes)
-  📄 sdk.gen.ts                               (175397 bytes)
-  📄 types.gen.ts                             (205496 bytes)
-  📄 AddUser.tsx                              ( 10505 bytes)
-  📄 DeleteUser.tsx                           (  2760 bytes)
-  📄 EditUser.tsx                             ( 12996 bytes)
+  📄 request.ts                               ( 10364 bytes)
+  📄 index.ts                                 (  3727 bytes)
+  📄 schemas.gen.ts                           ( 11705 bytes)
+  📄 sdk.gen.ts                               ( 13225 bytes)
+  📄 types.gen.ts                             (  5609 bytes)
+  📄 AddUser.tsx                              ( 10584 bytes)
+  📄 DeleteUser.tsx                           (  2690 bytes)
+  📄 EditUser.tsx                             ( 13018 bytes)
   📄 UserActionsMenu.tsx                      (  1115 bytes)
   📄 columns.tsx                              (  2154 bytes)
   📄 AddAppointment.tsx                       ( 21922 bytes)
@@ -173,10 +164,10 @@ DASHBOARD FILES INDEX
   📄 AppSidebar.tsx                           (  2346 bytes)
   📄 Main.tsx                                 (  1415 bytes)
   📄 User.tsx                                 (  2922 bytes)
-  📄 ChangePassword.tsx                       (  4347 bytes)
+  📄 ChangePassword.tsx                       (  4304 bytes)
   📄 DeleteAccount.tsx                        (   458 bytes)
-  📄 DeleteConfirmation.tsx                   (  2425 bytes)
-  📄 UserInformation.tsx                      ( 10844 bytes)
+  📄 DeleteConfirmation.tsx                   (  2366 bytes)
+  📄 UserInformation.tsx                      ( 10785 bytes)
   📄 AboutDoctorForm.tsx                      ( 14583 bytes)
   📄 ContactInformationForm.tsx               ( 13484 bytes)
   📄 HeroSectionForm.tsx                      ( 11631 bytes)
@@ -211,22 +202,22 @@ DASHBOARD FILES INDEX
   📄 tabs.tsx                                 (  1955 bytes)
   📄 textarea.tsx                             (   773 bytes)
   📄 tooltip.tsx                              (  1878 bytes)
-  📄 useAuth.ts                               (  1842 bytes)
+  📄 useAuth.ts                               (  1708 bytes)
   📄 useCopyToClipboard.ts                    (   794 bytes)
   📄 useCustomToast.ts                        (   385 bytes)
   📄 useMobile.ts                             (   565 bytes)
   📄 index.css                                (  4187 bytes)
   📄 doctorEnums.ts                           (  3489 bytes)
   📄 utils.ts                                 (   166 bytes)
-  📄 main.tsx                                 (  1526 bytes)
-  📄 routeTree.gen.ts                         ( 22795 bytes)
+  📄 main.tsx                                 (  1473 bytes)
+  📄 routeTree.gen.ts                         ( 22799 bytes)
   📄 __root.tsx                               (   651 bytes)
-  📄 _layout.tsx                              (  1127 bytes)
-  📄 admin.tsx                                (  1965 bytes)
+  📄 _layout.tsx                              (  1105 bytes)
+  📄 admin.tsx                                (  1699 bytes)
   📄 appointments.tsx                         (  4003 bytes)
-  📄 availability.tsx                         (  5219 bytes)
+  📄 availability.tsx                         (  5191 bytes)
   📄 cases.tsx                                (  3754 bytes)
-  📄 core-settings.tsx                        (  6620 bytes)
+  📄 core-settings.tsx                        (  6592 bytes)
   📄 finance.$cashBookId.tsx                  (  8162 bytes)
   📄 finance.tsx                              (  6827 bytes)
   📄 followups.tsx                            (  3755 bytes)
@@ -247,7 +238,7 @@ DASHBOARD FILES INDEX
   📄 login.tsx                                (  3297 bytes)
   📄 recover-password.tsx                     (  3285 bytes)
   📄 reset-password.tsx                       (  4573 bytes)
-  📄 signup.tsx                               (  5220 bytes)
+  📄 signup.tsx                               (  5198 bytes)
   📄 financeApi.ts                            (  9224 bytes)
   📄 utils.ts                                 (   706 bytes)
   📄 vite-env.d.ts                            (   155 bytes)
@@ -270,7 +261,7 @@ DASHBOARD FILES INDEX
 
 📁 VITE.CONFIG.TS
 ----------------------------------------
-  📄 vite.config.ts                           (   665 bytes)
+  📄 vite.config.ts                           (   643 bytes)
 
 
 ================================================================================
@@ -278,17 +269,18 @@ SECTION SUMMARY
 ================================================================================
 
 .GITHUB                1 files     5,619 bytes
-README.MD              1 files     2,936 bytes
+FRONTEND_ARCHITECTURE_AND_WORKFLOWS.MD   1 files    24,013 bytes
+README.MD              1 files     4,701 bytes
 BIOME.JSON             1 files       995 bytes
 COMPONENTS.JSON        1 files       446 bytes
 INDEX.HTML             1 files       454 bytes
-OPENAPI-TS.CONFIG.TS   1 files       373 bytes
-PACKAGE-LOCK.JSON      1 files   244,193 bytes
-PACKAGE.JSON           1 files     2,190 bytes
+OPENAPI-TS.CONFIG.TS   1 files       813 bytes
+PACKAGE-LOCK.JSON      1 files   235,801 bytes
+PACKAGE.JSON           1 files     2,153 bytes
 PLAYWRIGHT.CONFIG.TS   1 files     2,480 bytes
-SRC                  210 files  1,699,792 bytes
+SRC                  197 files  1,110,043 bytes
 TSCONFIG.BUILD.JSON    1 files        67 bytes
 TSCONFIG.JSON          1 files       754 bytes
 TSCONFIG.NODE.JSON     1 files       213 bytes
 VERCEL.JSON            1 files        79 bytes
-VITE.CONFIG.TS         1 files       665 bytes
+VITE.CONFIG.TS         1 files       643 bytes

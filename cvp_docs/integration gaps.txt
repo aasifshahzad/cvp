@@ -1,0 +1,27 @@
+Let me read both frontends thoroughly before writing anything.Now I have the full picture. Let me also quickly check what homeo pages exist and what the registration steps need.Now I have a complete, deep understanding of all three systems. Let me write the comprehensive guide.Here's the full picture after reading all three codebases thoroughly.
+
+---
+
+## The corrected mental model
+
+You were right to flag this. The relationship is:
+
+**Dashboard = CMS** (writes). **Homeo = display layer** (reads). **Same DB, no direct frontend-to-frontend communication.**
+
+The dashboard's "Web Content" section already manages Hero, About Doctor, Services, Testimonials, and Contact Info through authenticated endpoints. The homeo site reads all of that through the corresponding `*-public` endpoints. The doctor's profile (specialization, consultation fee, clinic name) is edited in Dashboard ? Settings and read by the homeo site through `GET /public/doctors`.
+
+---
+
+## What's already wired vs what's missing
+
+**Already exists in the backend, just needs to be called from homeo:** all 9 public endpoints — web content, doctor directory, availability, and booking.
+
+**Three genuine gaps I found:**
+
+1. `UserRegister` Pydantic model in the backend may be missing `specialization`, `clinic_name`, and `clinic_address` (they're in `UserBase` but the registration schema was stripped down). Verify and add those fields so the homeo registration form (`Step1Personal` + `Step2Practice`) can submit them properly.
+
+2. `StatsBar.tsx` on the homepage — if you want dynamic numbers ("500+ patients"), add `GET /public/stats` to the backend (one query, 5 lines of code). If hardcoded is fine, skip it.
+
+3. Testimonials — the public endpoint returns all testimonials regardless of `is_approved`. Filter client-side with `.filter(t => t.is_approved)` until/unless you add a query param to enforce it server-side.
+
+The guide in the file has complete, copy-ready code for `api.ts`, `types.ts`, every page wiring, the CORS update, and a data flow diagram showing exactly what happens end-to-end.

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegistrationFormData } from "@/lib/types";
 import { registrationSchema } from "@/lib/validations";
-import { api } from "@/lib/api";
+import { registerDoctor } from "@/lib/api";
 import { Step1Personal } from "@/components/register/Step1Personal";
 import { Step2Practice } from "@/components/register/Step2Practice";
 import { Step3Review } from "@/components/register/Step3Review";
@@ -26,8 +26,8 @@ export default function RegisterPage() {
       password: "",
       confirm_password: "",
       clinic_name: "",
-      city: "",
-      qualification: "",
+      clinic_address: "",
+      registration_number: "",
       years_of_experience: 0,
       specialties: [],
     },
@@ -46,14 +46,23 @@ export default function RegisterPage() {
     setError(null);
     try {
       const formData = form.getValues();
-      // Remove confirm_password before sending to API
-      const { confirm_password, ...registrationData } = formData;
 
-      await api.registration.register(registrationData);
+      // Map form data to backend API format
+      await registerDoctor({
+        email: formData.email,
+        password: formData.password,
+        full_name: formData.full_name,
+        phone: formData.phone_number,
+        registration_number: formData.registration_number || "",
+        specialization: (formData.specialties || []).join(", "),
+        clinic_name: formData.clinic_name,
+        clinic_address: formData.clinic_address || "",
+      });
+
       setIsSubmitted(true);
     } catch (err: any) {
       setError(
-        err.response?.data?.detail ||
+        err.message ||
           "Registration failed. Please try again or contact support.",
       );
       console.error("Registration error:", err);

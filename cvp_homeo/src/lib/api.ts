@@ -1,154 +1,83 @@
-import axios from "axios";
+// CVP Homeo - API Client
+// Aligned with backend FastAPI endpoints
+
 import type {
-  Doctor,
-  DoctorListParams,
-  AppointmentData,
-  Appointment,
-  RegistrationData,
-  RegistrationResponse,
-  HeroSection,
-  Service,
-  ServicesSectionData,
-  AboutDoctor,
-  Testimonial,
-  TestimonialsData,
-  ContactInfoData,
+  HeroSectionResponse,
+  AboutDoctorResponse,
+  ServicesResponse,
+  TestimonialsResponse,
+  ContactInfoResponse,
+  DoctorPublicInfo,
   AvailabilityResponse,
-  DoctorAvailability,
+  PublicBookingRequest,
+  AppointmentBookingResponse,
+  DoctorRegisterRequest,
+  UserPublic,
 } from "./types";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
-const apiClient = axios.create({
-  baseURL: API_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+async function get<T>(path: string): Promise<T> {
+  const res = await fetch(`${BASE}${path}`, { next: { revalidate: 60 } });
+  if (!res.ok) throw new Error(`GET ${path} → ${res.status}`);
+  return res.json();
+}
 
-// Error handling interceptor
-apiClient.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response) {
-      throw new Error(error.response.data.detail || "An error occurred");
-    } else if (error.request) {
-      throw new Error("Network error. Please check your connection.");
-    } else {
-      throw new Error(error.message);
-    }
-  },
-);
+async function post<T>(path: string, body: unknown): Promise<T> {
+  const res = await fetch(`${BASE}${path}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err?.detail ?? `POST ${path} → ${res.status}`);
+  }
+  return res.json();
+}
 
-export const api = {
-  // Doctor endpoints
-  doctors: {
-    list: async (params: DoctorListParams = {}): Promise<Doctor[]> => {
-      const response = await apiClient.get("/public/doctors", { params });
-      return response.data;
-    },
+// ── Web content (global endpoints, filter client-side) ──────────
+export const getHeroSections = () =>
+  get<HeroSectionResponse[]>("/web-content/hero-section-public");
+export const getAboutDoctor = () =>
+  get<AboutDoctorResponse[]>("/web-content/about-doctor-public");
+export const getServices = () =>
+  get<ServicesResponse[]>("/web-content/services-public");
+export const getTestimonials = () =>
+  get<TestimonialsResponse[]>("/web-content/testimonials-public");
+export const getContactInfo = () =>
+  get<ContactInfoResponse[]>("/web-content/contact-info-public");
 
-    getById: async (id: string): Promise<Doctor> => {
-      const response = await apiClient.get(`/public/doctors/${id}`);
-      return response.data;
-    },
+// ── Doctor directory ─────────────────────────────────────────────
+export const getDoctors = () => get<DoctorPublicInfo[]>("/public/doctors");
+export const getDoctor = (id: string) =>
+  get<DoctorPublicInfo>(`/public/doctors/${id}`);
 
-    getBySlug: async (slug: string): Promise<Doctor> => {
-      const response = await apiClient.get(`/public/doctors/slug/${slug}`);
-      return response.data;
-    },
-  },
+// ── Booking flow (never cached) ──────────────────────────────────
+export const getAvailability = (doctorId: string, date: string) =>
+  get<AvailabilityResponse>(`/public/availability/${doctorId}/${date}`);
 
-  // Appointment endpoints
-  appointments: {
-    create: async (
-      doctorId: string,
-      data: AppointmentData,
-    ): Promise<Appointment> => {
-      const response = await apiClient.post(
-        `/public/appointments/${doctorId}`,
-        data,
-      );
-      return response.data;
-    },
+export const bookAppointment = (data: PublicBookingRequest) =>
+  post<AppointmentBookingResponse>("/public/appointments/book-public", data);
 
-    getAvailability: async (
-      doctorId: string,
-    ): Promise<DoctorAvailability[]> => {
-      const response = await apiClient.get(`/public/availability/${doctorId}`);
-      return response.data;
-    },
-  },
+// ── Doctor registration ──────────────────────────────────────────
+export const registerDoctor = (data: DoctorRegisterRequest) =>
+  post<UserPublic>("/users/signup", data);
 
-  // Registration endpoint
-  registration: {
-    register: async (data: RegistrationData): Promise<RegistrationResponse> => {
-      const response = await apiClient.post("/users/", data);
-      return response.data;
-    },
-
-    checkEmailAvailability: async (email: string): Promise<boolean> => {
-      try {
-        const response = await apiClient.get(`/users/check-email/${email}`);
-        return response.data.available;
-      } catch {
-        return false;
-      }
-    },
-  },
-
-  // Web content endpoints (matching old doctor code API pattern)
-  webContent: {
-    getHero: async (doctorId: string): Promise<HeroSection> => {
-      const response = await apiClient.get(
-        `/web-content/hero-section-public/${doctorId}`,
-      );
-      return response.data;
-    },
-
-    getServices: async (doctorId: string): Promise<ServicesSectionData> => {
-      const response = await apiClient.get(
-        `/web-content/services-public/${doctorId}`,
-      );
-      return response.data;
-    },
-
-    getAbout: async (doctorId: string): Promise<AboutDoctor> => {
-      const response = await apiClient.get(
-        `/web-content/about-doctor-public/${doctorId}`,
-      );
-      return response.data;
-    },
-
-    getTestimonials: async (doctorId: string): Promise<TestimonialsData> => {
-      const response = await apiClient.get(
-        `/web-content/testimonials-public/${doctorId}`,
-      );
-      return response.data;
-    },
-
-    getContact: async (doctorId: string): Promise<ContactInfoData> => {
-      const response = await apiClient.get(
-        `/web-content/contact-info-public/${doctorId}`,
-      );
-      return response.data;
-    },
-  },
-
-  // Availability endpoints
-  availability: {
-    getSlots: async (
-      doctorId: string,
-      date: string,
-    ): Promise<AvailabilityResponse> => {
-      const response = await apiClient.get(
-        `/public/availability/${doctorId}?date=${date}`,
-      );
-      return response.data;
-    },
-  },
-};
-
-export default api;
+// ── Type imports (for convenience) ───────────────────────────────
+export type {
+  HeroSectionResponse,
+  AboutDoctorResponse,
+  ServicesResponse,
+  TestimonialsResponse,
+  ContactInfoResponse,
+  DoctorPublicInfo,
+  AvailabilityResponse,
+  PublicBookingRequest,
+  AppointmentBookingResponse,
+  DoctorRegisterRequest,
+  UserPublic,
+} from "./types";
 
 // Made with Bob

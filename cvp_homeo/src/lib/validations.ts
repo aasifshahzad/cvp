@@ -26,8 +26,14 @@ export const registrationSchema = z
       .string()
       .min(3, "Clinic name must be at least 3 characters")
       .max(100, "Clinic name must be less than 100 characters"),
-    city: z.string().min(1, "Please select a city"),
-    qualification: z.string().min(1, "Please select your qualification"),
+    clinic_address: z
+      .string()
+      .min(10, "Please enter a complete address")
+      .max(200, "Address must be less than 200 characters"),
+    registration_number: z
+      .string()
+      .min(3, "Please enter your registration number or qualification")
+      .max(50, "Registration number must be less than 50 characters"),
     years_of_experience: z
       .number()
       .min(0, "Years of experience cannot be negative")

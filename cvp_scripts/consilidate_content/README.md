@@ -1,14 +1,15 @@
 # Workspace Consolidation Report
 
-**Generated:** 2026-05-15 15:56:09
+**Generated:** 2026-05-17 22:44:16
 
 ## Consolidation Summary
 
 | Folder | Files | Size (MB) |
 |--------|-------|----------|
-| backend      |   106 |     0.89 |
-| dashboard    |   224 |     1.87 |
-| **TOTAL** | **330** | **2.76** |
+| backend      |    75 |     0.89 |
+| dashboard    |   212 |     1.32 |
+| homeo        |   139 |    14.64 |
+| **TOTAL** | **426** | **16.85** |
 
 ## Generated Files
 
@@ -21,6 +22,11 @@
 
 - `consolidated_dashboard.txt` - All code files consolidated
 - `consolidated_dashboard_index.txt` - File structure and index
+
+### Homeo
+
+- `consolidated_homeo.txt` - All code files consolidated
+- `consolidated_homeo_index.txt` - File structure and index
 
 ## How to Use
 

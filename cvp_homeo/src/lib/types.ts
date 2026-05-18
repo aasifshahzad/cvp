@@ -1,34 +1,183 @@
-// Doctor Types
-export interface Doctor {
+// CVP Homeo - Type Definitions
+// Aligned with backend Pydantic models
+
+// ── Web content types (match backend Pydantic models) ──
+
+export interface Credential {
+  id?: number;
+  label: string;
+  value: string;
+  order: number;
+}
+
+export interface HeroSectionResponse {
+  id: number;
+  title: string;
+  subtitle: string;
+  description: string;
+  credentials: Credential[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Qualification {
+  id?: number;
+  qualification_text: string;
+  order: number;
+}
+
+export interface Specialization {
+  id?: number;
+  specialization_text: string;
+  order: number;
+}
+
+export interface AboutDoctorResponse {
+  id: number;
+  title: string;
+  experience_title: string;
+  experience_description: string;
+  qualifications: Qualification[];
+  specializations: Specialization[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Service {
+  id?: number;
+  icon: string;
+  image_url: string;
+  title: string;
+  description: string;
+  order: number;
+}
+
+export interface ServicesResponse {
+  id: number;
+  title: string;
+  services: Service[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Testimonial {
+  id?: number;
+  name: string;
+  city: string;
+  rating: number;
+  message: string;
+  order: number;
+  is_approved: boolean;
+}
+
+export interface TestimonialsResponse {
+  id: number;
+  title: string;
+  testimonials: Testimonial[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ContactInfoResponse {
+  id: number;
+  title: string;
+  address: string;
+  city: string;
+  phone_primary: string;
+  phone_secondary?: string;
+  weekdays_hours: string;
+  saturday_hours: string;
+  sunday_hours: string;
+  whatsapp_number: string;
+  whatsapp_message: string;
+  created_at: string;
+  updated_at: string;
+}
+
+// ── Doctor & booking types ───────────────────────────────────────
+
+export interface DoctorPublicInfo {
   id: string;
   full_name: string;
-  email: string;
-  phone_number?: string;
-  clinic_name?: string;
-  city: string;
-  qualification: string;
-  years_of_experience: number;
-  specialties: string[];
   specialization?: string;
-  profile_photo?: string;
-  rating?: number;
-  slug: string;
-  is_approved: boolean;
-  created_at: string;
+  clinic_name?: string;
   consultation_fee?: number;
+}
+
+export interface AvailableSlot {
+  start: string;
+  end: string;
+  duration_minutes: number;
+  booked: boolean;
+}
+
+export interface AvailabilityResponse {
+  date: string;
+  day_of_week: string;
+  available_slots: AvailableSlot[];
+  doctor?: DoctorPublicInfo;
+  message?: string;
+}
+
+export interface PublicBookingRequest {
+  doctor_id: string;
+  full_name: string;
+  phone: string;
+  gender?: "male" | "female" | "other" | "child";
+  appointment_date: string; // "YYYY-MM-DD"
+  appointment_time: string; // "HH:MM"
+  reason?: string;
+}
+
+export interface AppointmentBookingResponse {
+  success: boolean;
+  appointment_id?: string;
+  message: string;
+}
+
+// ── Doctor registration ──────────────────────────────────────────
+
+export interface DoctorRegisterRequest {
+  email: string;
+  password: string;
+  full_name: string;
   phone?: string;
+  registration_number?: string;
+  specialization?: string;
+  clinic_name?: string;
   clinic_address?: string;
 }
 
-export interface DoctorListParams {
-  city?: string;
-  specialty?: string;
-  skip?: number;
-  limit?: number;
-  sort_by?: "rating" | "experience" | "created_at";
+export interface UserPublic {
+  id: string;
+  full_name: string;
+  email?: string;
+  role: string;
+  specialization?: string;
+  clinic_name?: string;
+  phone?: string;
+  is_active: boolean;
+  is_approved: boolean;
 }
 
-// Appointment Types
+// ── Legacy types (for backward compatibility during migration) ──
+
+export interface Doctor extends DoctorPublicInfo {
+  email?: string;
+  phone_number?: string;
+  phone?: string;
+  city?: string;
+  qualification?: string;
+  years_of_experience?: number;
+  specialties?: string[];
+  profile_photo?: string;
+  rating?: number;
+  slug?: string;
+  is_approved?: boolean;
+  created_at?: string;
+  clinic_address?: string;
+}
+
 export interface AppointmentData {
   patient_name: string;
   patient_phone: string;
@@ -49,20 +198,21 @@ export interface Appointment {
   created_at: string;
 }
 
-// Registration Types
 export interface RegistrationData {
   full_name: string;
   email: string;
   phone_number: string;
   password: string;
   clinic_name: string;
-  city: string;
-  qualification: string;
-  years_of_experience: number;
-  specialties: string[];
+  city?: string;
+  qualification?: string;
+  years_of_experience?: number;
+  specialties?: string[];
+  registration_number?: string;
+  specialization?: string;
+  clinic_address?: string;
 }
 
-// Form data with confirm_password for validation
 export interface RegistrationFormData extends RegistrationData {
   confirm_password: string;
 }
@@ -72,97 +222,6 @@ export interface RegistrationResponse {
   email: string;
   full_name: string;
   message: string;
-}
-
-// Web Content Types (Old API Pattern - from web-content endpoints)
-export interface HeroSection {
-  id: number;
-  title: string;
-  subtitle: string;
-  description: string;
-  credentials: Array<{
-    id: number;
-    value: string;
-    label: string;
-  }>;
-}
-
-export interface Service {
-  id: number;
-  title: string;
-  description: string;
-  image_url?: string;
-}
-
-export interface ServicesSectionData {
-  id: number;
-  title: string;
-  services: Service[];
-}
-
-export interface AboutDoctor {
-  id: number;
-  title: string;
-  experience_title: string;
-  experience_description: string;
-  qualifications: Array<{
-    id: number;
-    qualification_text: string;
-  }>;
-  specializations: Array<{
-    id: number;
-    specialization_text: string;
-  }>;
-}
-
-export interface Testimonial {
-  id: number;
-  name: string;
-  city: string;
-  rating: number;
-  message: string;
-  is_approved: boolean;
-}
-
-export interface TestimonialsData {
-  id: number;
-  title: string;
-  testimonials: Testimonial[];
-}
-
-export interface ContactInfoData {
-  id: number;
-  phone_primary: string;
-  phone_secondary?: string;
-  whatsapp_number?: string;
-  email: string;
-  clinic_address: string;
-  city: string;
-  working_hours: string;
-}
-
-export interface AvailabilitySlot {
-  start: string;
-  end: string;
-  booked: boolean;
-}
-
-export interface AvailabilityResponse {
-  date: string;
-  available_slots: AvailabilitySlot[];
-  doctor: Doctor & {
-    consultation_fee?: number;
-    specialization?: string;
-  };
-}
-
-export interface DoctorAvailability {
-  id: string;
-  doctor_id: string;
-  day_of_week: number;
-  start_time: string;
-  end_time: string;
-  is_available: boolean;
 }
 
 // Form Types
@@ -176,10 +235,13 @@ export interface Step1FormData {
 
 export interface Step2FormData {
   clinic_name: string;
-  city: string;
-  qualification: string;
-  years_of_experience: number;
-  specialties: string[];
+  city?: string;
+  qualification?: string;
+  years_of_experience?: number;
+  specialties?: string[];
+  registration_number?: string;
+  specialization?: string;
+  clinic_address?: string;
 }
 
 // API Response Types

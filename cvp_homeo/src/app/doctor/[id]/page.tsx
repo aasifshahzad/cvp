@@ -1,6 +1,13 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { api } from "@/lib/api";
+import {
+  getDoctor,
+  getHeroSections,
+  getServices,
+  getAboutDoctor,
+  getTestimonials,
+  getContactInfo,
+} from "@/lib/api";
 import { ProfileHero } from "@/components/profile/ProfileHero";
 import { BookingSection } from "@/components/profile/BookingSection";
 import { ServicesSection } from "@/components/profile/ServicesSection";
@@ -10,125 +17,114 @@ import { ContactSection } from "@/components/profile/ContactSection";
 import { WhatsAppButton } from "@/components/profile/WhatsAppButton";
 
 interface PageProps {
-    params?: Promise<{
-        id: string;
-    }>;
-    searchParams?: Promise<any>;
+  params?: Promise<{
+    id: string;
+  }>;
+  searchParams?: Promise<any>;
 }
 
 // Generate metadata for SEO
 export async function generateMetadata({
-    params,
+  params,
 }: PageProps): Promise<Metadata> {
-    try {
-        const resolvedParams = await params!;
-        const doctor = await api.doctors.getById(resolvedParams.id);
+  try {
+    const resolvedParams = await params!;
+    const doctor = await getDoctor(resolvedParams.id);
 
-        return {
-            title: `Dr. ${doctor.full_name} - ${doctor.specialization || "Homeopathic Doctor"} in ${doctor.city}`,
-            description: `Book an appointment with Dr. ${doctor.full_name}, an experienced ${doctor.specialization || "homeopathic"} doctor in ${doctor.city}. ${doctor.years_of_experience}+ years of experience.`,
-            keywords: [
-                doctor.full_name,
-                "Homeopathic Doctor",
-                doctor.city,
-                doctor.specialization || "",
-                "Book Appointment",
-                "Natural Healing",
-                "CVP Homeopathy",
-            ].filter(Boolean),
-            openGraph: {
-                title: `Dr. ${doctor.full_name} - ${doctor.specialization || "Homeopathic Doctor"}`,
-                description: `Book an appointment with Dr. ${doctor.full_name} in ${doctor.city}`,
-                type: "profile",
-            },
-        };
-    } catch (error) {
-        return {
-            title: "Doctor Profile - CVP Homeopathy",
-            description: "Find and book appointments with homeopathic doctors",
-        };
-    }
+    return {
+      title: `Dr. ${doctor.full_name} - ${doctor.specialization || "Homeopathic Doctor"}`,
+      description: `Book an appointment with Dr. ${doctor.full_name}, ${doctor.specialization || "a homeopathic doctor"}. ${doctor.clinic_name ? `Visit ${doctor.clinic_name}.` : ""}`,
+      keywords: [
+        doctor.full_name,
+        "Homeopathic Doctor",
+        doctor.specialization || "",
+        "Book Appointment",
+        "Natural Healing",
+        "CVP Homeopathy",
+      ].filter(Boolean),
+      openGraph: {
+        title: `Dr. ${doctor.full_name} - ${doctor.specialization || "Homeopathic Doctor"}`,
+        description: `Book an appointment with Dr. ${doctor.full_name}`,
+        type: "profile",
+      },
+    };
+  } catch (error) {
+    return {
+      title: "Doctor Profile - CVP Homeopathy",
+      description: "Find and book appointments with homeopathic doctors",
+    };
+  }
 }
 
 export default async function DoctorProfilePage({ params }: PageProps) {
-    try {
-        // Fetch doctor basic info
-        const resolvedParams = await params!;
-        console.log("Fetching doctor with ID:", resolvedParams.id);
-        const doctor = await api.doctors.getById(resolvedParams.id);
+  try {
+    // Fetch doctor basic info
+    const resolvedParams = await params!;
+    const doctor = await getDoctor(resolvedParams.id);
 
-        if (!doctor) {
-            notFound();
-        }
-
-        console.log("Doctor fetched:", doctor.full_name);
-
-        // Fetch all web content sections in parallel
-        console.log("Fetching web content for doctor ID:", doctor.id);
-        const [heroData, servicesData, aboutData, testimonialsData, contactData] =
-            await Promise.allSettled([
-                api.webContent.getHero(doctor.id),
-                api.webContent.getServices(doctor.id),
-                api.webContent.getAbout(doctor.id),
-                api.webContent.getTestimonials(doctor.id),
-                api.webContent.getContact(doctor.id),
-            ]);
-
-        // Log results
-        console.log("Hero data:", heroData.status);
-        console.log("Services data:", servicesData.status);
-        console.log("About data:", aboutData.status);
-        console.log("Testimonials data:", testimonialsData.status);
-        console.log("Contact data:", contactData.status);
-
-        return (
-            <>
-                {/* Hero Section */}
-                {heroData.status === "fulfilled" && (
-                    <ProfileHero data={heroData.value} doctor={doctor} />
-                )}
-
-                {/* Booking Section */}
-                <BookingSection
-                    doctorId={doctor.id}
-                    doctorName={doctor.full_name}
-                    consultationFee={doctor.consultation_fee}
-                />
-
-                {/* Services Section */}
-                {servicesData.status === "fulfilled" && (
-                    <ServicesSection data={servicesData.value} />
-                )}
-
-                {/* About Doctor Section */}
-                {aboutData.status === "fulfilled" && (
-                    <AboutSection data={aboutData.value} />
-                )}
-
-                {/* Testimonials Section */}
-                {testimonialsData.status === "fulfilled" && (
-                    <TestimonialsSection data={testimonialsData.value} />
-                )}
-
-                {/* Contact Section */}
-                {contactData.status === "fulfilled" && (
-                    <ContactSection data={contactData.value} doctor={doctor} />
-                )}
-
-                {/* WhatsApp Floating Button */}
-                {contactData.status === "fulfilled" &&
-                    contactData.value.whatsapp_number && (
-                        <WhatsAppButton
-                            phoneNumber={contactData.value.whatsapp_number}
-                            doctorName={doctor.full_name}
-                        />
-                    )}
-            </>
-        );
-    } catch (error) {
-        console.error("Error loading doctor profile:", error);
-        notFound();
+    if (!doctor) {
+      notFound();
     }
+
+    // Fetch all web content sections in parallel (global endpoints)
+    const [heroData, servicesData, aboutData, testimonialsData, contactData] =
+      await Promise.allSettled([
+        getHeroSections(),
+        getServices(),
+        getAboutDoctor(),
+        getTestimonials(),
+        getContactInfo(),
+      ]);
+
+    // Use first item from each array (global content)
+    const hero = heroData.status === "fulfilled" ? heroData.value[0] : null;
+    const services =
+      servicesData.status === "fulfilled" ? servicesData.value[0] : null;
+    const about = aboutData.status === "fulfilled" ? aboutData.value[0] : null;
+    const testimonials =
+      testimonialsData.status === "fulfilled"
+        ? testimonialsData.value[0]
+        : null;
+    const contact =
+      contactData.status === "fulfilled" ? contactData.value[0] : null;
+
+    return (
+      <>
+        {/* Hero Section */}
+        {hero && <ProfileHero data={hero} doctor={doctor} />}
+
+        {/* Booking Section */}
+        <BookingSection
+          doctorId={doctor.id}
+          doctorName={doctor.full_name}
+          consultationFee={doctor.consultation_fee}
+        />
+
+        {/* Services Section */}
+        {services && <ServicesSection data={services} />}
+
+        {/* About Doctor Section */}
+        {about && <AboutSection data={about} />}
+
+        {/* Testimonials Section */}
+        {testimonials && <TestimonialsSection data={testimonials} />}
+
+        {/* Contact Section */}
+        {contact && <ContactSection data={contact} doctor={doctor} />}
+
+        {/* WhatsApp Floating Button */}
+        {contact && contact.whatsapp_number && (
+          <WhatsAppButton
+            phoneNumber={contact.whatsapp_number}
+            doctorName={doctor.full_name}
+          />
+        )}
+      </>
+    );
+  } catch (error) {
+    console.error("Error loading doctor profile:", error);
+    notFound();
+  }
 }
 
 // Made with Bob
